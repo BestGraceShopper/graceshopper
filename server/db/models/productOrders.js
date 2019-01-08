@@ -12,7 +12,7 @@ const ProductOrders = db.define('productOrder', {
   }
 })
 
-module.exports = productOrders
+module.exports = ProductOrders
 
 
 // productOrders has many orders

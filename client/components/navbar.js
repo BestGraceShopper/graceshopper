@@ -15,7 +15,7 @@ export default class Navbar extends Component {
           <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
         </Menu>
       </div>
-
+  
     )
   }
 }
