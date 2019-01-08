@@ -13,7 +13,31 @@ async function seed() {
   ])
 
   const products = await Promise.all([
-    Product.create({name: 'socks', description: 'It\'s a sock.', imageUrl: 'https://assets.marthastewart.com/styles/wmax-570/d15/blue-baby-socks/blue-baby-socks_0_sq.jpg?itok=4TgWrMi3', price: 3.00, tags: ['sock'], inventory: 20})
+    Product.create({
+      name: 'Baby Blue sock',
+      description: "It's a sock. For your baby. Note: Only includes one sock.",
+      imageUrl:
+        'https://assets.marthastewart.com/styles/wmax-570/d15/blue-baby-socks/blue-baby-socks_0_sq.jpg?itok=4TgWrMi3',
+      price: 3.0,
+      tags: ['baby', 'sock', 'blue'],
+      inventory: 20
+    }),
+    Product.create({
+      name: 'Diaper Loading Onesie',
+      description: 'Full diaper imminent.',
+      imageUrl: 'https://i.ebayimg.com/images/g/pwIAAOSwx2dYGWq0/s-l300.jpg',
+      price: 19.99,
+      tags: ['diaper', 'loading', 'onesie', 'blue'],
+      inventory: 15
+    }),
+    // Product.create({
+    //   name: '',
+    //   description: '',
+    //   imageUrl: '',
+    //   price: 0.0,
+    //   tags: [''],
+    //   inventory: 15
+    // })
   ])
 
   console.log(`seeded ${users.length} users`)
