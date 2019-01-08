@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Input, Menu, Segment} from 'semantic-ui-react'
 import Routes from './routes'
+import ProductCard from './components/productCard'
 
 export default class App extends Component {
   state = {activeItem: 'home'}
@@ -18,7 +19,8 @@ export default class App extends Component {
           
         </Menu>
         <Segment>
-          <Routes />
+          <ProductCard/>
+           {/* <Routes /> */}
         </Segment>
       </div>
 
