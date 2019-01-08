@@ -35,7 +35,7 @@ const Product = db.define('product', {
     validate: {
       min: 0
     },
-    defaultValue: 0
+    defaultValue: 100
   },
   // rating: {
   //   type: Sequelize.FLOAT,
