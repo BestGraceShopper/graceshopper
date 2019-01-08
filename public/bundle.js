@@ -107,6 +107,8 @@ var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modu
 
 var _routes = _interopRequireDefault(__webpack_require__(/*! ./routes */ "./client/routes.js"));
 
+var _productCard = _interopRequireDefault(__webpack_require__(/*! ./components/productCard */ "./client/components/productCard.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -178,7 +180,7 @@ function (_Component) {
         name: "cart",
         active: activeItem === 'cart',
         onClick: this.handleItemClick
-      })), _react.default.createElement(_semanticUiReact.Segment, null, _react.default.createElement(_routes.default, null)));
+      })), _react.default.createElement(_semanticUiReact.Segment, null, _react.default.createElement(_productCard.default, null)));
     }
   }]);
 
@@ -484,6 +486,49 @@ function (_Component) {
 
 
 exports.default = Navbar;
+
+/***/ }),
+
+/***/ "./client/components/productCard.js":
+/*!******************************************!*\
+  !*** ./client/components/productCard.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ProductCard = function ProductCard() {
+  return _react.default.createElement(_semanticUiReact.Card, null, _react.default.createElement(_semanticUiReact.Image, {
+    src: "http://www.ieeeaustsb.org/files/2017/05/placeholder-female-square.png"
+  }), _react.default.createElement(_semanticUiReact.Card.Content, null, _react.default.createElement(_semanticUiReact.Card.Header, null, " Girl "), _react.default.createElement(_semanticUiReact.Card.Meta, null, _react.default.createElement("span", null, " $30000.00 "))), _react.default.createElement(_semanticUiReact.Card.Content, {
+    extra: true
+  }, _react.default.createElement(_semanticUiReact.Button, {
+    animated: "vertical",
+    fluid: true
+  }, _react.default.createElement(_semanticUiReact.Button.Content, {
+    hidden: true
+  }, " Add To Cart "), _react.default.createElement(_semanticUiReact.Button.Content, {
+    visible: true
+  }, _react.default.createElement(_semanticUiReact.Icon, {
+    name: "shop"
+  })))));
+};
+
+var _default = ProductCard;
+exports.default = _default;
 
 /***/ }),
 
