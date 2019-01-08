@@ -5,7 +5,7 @@ const db = require('../db')
 // created product table
 // name, descirption, price, tags array, inventory #, image, and rating
 const Product = db.define('product', {
- name: {
+  name: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
@@ -21,13 +21,13 @@ const Product = db.define('product', {
     defaultValue: 'default image'
   },
   price: {
-    type: Sequelize.DECIMAL(10,2),
-    validate:{
-      min:0.01
+    type: Sequelize.DECIMAL(10, 2),
+    validate: {
+      min: 0.01
     }
   },
   tags: {
-    type:Sequelize.ARRAY(Sequelize.TEXT),
+    type: Sequelize.ARRAY(Sequelize.TEXT),
     defaultValue: []
   },
   inventory: {
@@ -52,11 +52,6 @@ module.exports = Product
 //   // Postgres will return the updated user by default (unless disabled by setting { returning: false })
 //   // In other dialects, you'll want to call user.reload() to get the updated instance...
 // })
-
-
-
-
-
 
 // boilermaker code VVVVVVV
 // /**

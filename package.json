@@ -1,5 +1,5 @@
 {
-  "name": "boilermaker",
+  "name": "graceshopper",
   "version": "1.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -42,6 +42,7 @@
     "connect-session-sequelize": "^4.1.0",
     "express": "^4.16.3",
     "express-session": "^1.15.1",
+    "heroku": "^7.19.4",
     "history": "^4.6.3",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
@@ -56,6 +57,8 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.84.0",
     "sequelize": "^4.38.0",
     "socket.io": "^2.1.1"
   },

@@ -1,3 +1,4 @@
+
 const Sequelizer = require('sequelize')
 const {Product, ProductOrders, Order, User} = require('../db')
 
@@ -10,5 +11,4 @@ module.exports = {
   Product,
   Order,
   ProductOrders,
-  User
 }
