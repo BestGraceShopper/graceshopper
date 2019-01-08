@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Input, Menu, Segment} from 'semantic-ui-react'
 import Routes from './routes'
-import ProductList from './components/ProductCard'
+import ProductList from './components/ProductList'
 
 export default class App extends Component {
   state = {activeItem: 'home'}
