@@ -14,7 +14,7 @@ const Product = db.define('product', {
     type: Sequelize.TEXT,
     allowNull: false
   },
-  image: {
+  imageUrl: {
     type: Sequelize.STRING,
     // need to find and add default product image
     // also need to reference the image - where stored, etc
