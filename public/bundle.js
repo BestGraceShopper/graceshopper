@@ -107,7 +107,7 @@ var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modu
 
 var _routes = _interopRequireDefault(__webpack_require__(/*! ./routes */ "./client/routes.js"));
 
-var _ProductList = _interopRequireDefault(__webpack_require__(/*! ./components/ProductList */ "./client/components/ProductList.js"));
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -172,15 +172,25 @@ function (_Component) {
       return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Menu, {
         pointing: true
       }, _react.default.createElement(_semanticUiReact.Menu.Item, {
+        as: _reactRouterDom.Link,
+        to: "/home",
         name: "home",
         active: activeItem === 'home',
         onClick: this.handleItemClick
       }), _react.default.createElement(_semanticUiReact.Menu.Item, {
+        as: _reactRouterDom.Link,
+        to: "/products",
+        name: "products",
+        active: activeItem === 'products',
+        onClick: this.handleItemClick
+      }), _react.default.createElement(_semanticUiReact.Menu.Item, {
+        as: _reactRouterDom.Link,
+        to: "/cart",
         position: "right",
         name: "cart",
         active: activeItem === 'cart',
         onClick: this.handleItemClick
-      })), _react.default.createElement(_semanticUiReact.Segment, null, _react.default.createElement(_ProductList.default, null)));
+      })), _react.default.createElement(_semanticUiReact.Segment, null, _react.default.createElement(_routes.default, null)));
     }
   }]);
 
@@ -188,6 +198,36 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = App;
+
+/***/ }),
+
+/***/ "./client/components/Cart.js":
+/*!***********************************!*\
+  !*** ./client/components/Cart.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Cart = function Cart(props) {
+  return _react.default.createElement("div", null, "This will be the cart");
+};
+
+var _default = Cart;
+exports.default = _default;
 
 /***/ }),
 
@@ -788,6 +828,10 @@ var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ ".
 
 var _components = __webpack_require__(/*! ./components */ "./client/components/index.js");
 
+var _ProductList = _interopRequireDefault(__webpack_require__(/*! ./components/ProductList */ "./client/components/ProductList.js"));
+
+var _Cart = _interopRequireDefault(__webpack_require__(/*! ./components/Cart */ "./client/components/Cart.js"));
+
 var _store = __webpack_require__(/*! ./store */ "./client/store/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -836,17 +880,12 @@ function (_Component) {
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       return _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
-        path: "/login",
-        component: _components.Login
+        path: "/products",
+        component: _ProductList.default
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/signup",
-        component: _components.Signup
-      }), isLoggedIn && _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
-        path: "/home",
-        component: _components.UserHome
-      })), _react.default.createElement(_reactRouterDom.Route, {
-        component: _components.Login
-      }));
+        path: "/cart",
+        component: _Cart.default
+      }), ")}");
     }
   }]);
 

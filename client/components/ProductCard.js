@@ -12,10 +12,10 @@ const ProductCard = props => (
     </Card.Content>
     <Card.Content extra>
       <div className="ui two buttons">
-      <Button>
+        <Button>
           <Button.Content visible>Product Page</Button.Content>
-      </Button>
-        <Button primary animated="vertical" >
+        </Button>
+        <Button primary animated="vertical">
           <Button.Content hidden>Add to Cart</Button.Content>
           <Button.Content visible>
             <Icon name="shop" />
