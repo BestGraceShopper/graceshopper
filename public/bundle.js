@@ -222,8 +222,63 @@ var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modu
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var options = [{
+  key: 1,
+  text: '1',
+  value: 1
+}, {
+  key: 2,
+  text: '2',
+  value: 2
+}, {
+  key: 3,
+  text: '3',
+  value: 3
+}, {
+  key: 4,
+  text: '4',
+  value: 4
+}, {
+  key: 5,
+  text: '5',
+  value: 5
+}, {
+  key: 6,
+  text: '6',
+  value: 6
+}, {
+  key: 7,
+  text: '7',
+  value: 7
+}, {
+  key: 8,
+  text: '8',
+  value: 8
+}, {
+  key: 9,
+  text: '9',
+  value: 9
+}, {
+  key: 10,
+  text: '10',
+  value: 10
+}];
+
 var Cart = function Cart(props) {
-  return _react.default.createElement("div", null, "This will be the cart");
+  return _react.default.createElement(_semanticUiReact.Item.Group, null, _react.default.createElement(_semanticUiReact.Item, null, _react.default.createElement(_semanticUiReact.Item.Image, {
+    src: "https://react.semantic-ui.com/images/wireframe/image.png"
+  }), _react.default.createElement(_semanticUiReact.Item.Content, null, _react.default.createElement(_semanticUiReact.Item.Header, null, "Item Name"), _react.default.createElement(_semanticUiReact.Item.Meta, null, "$3050.00"), _react.default.createElement(_semanticUiReact.Item.Description, null, _react.default.createElement("span", null, "Description........")), _react.default.createElement(_semanticUiReact.Item.Extra, null, _react.default.createElement("a", {
+    href: ""
+  }, "Remove from Cart"), _react.default.createElement(_semanticUiReact.Menu, {
+    compact: true,
+    floated: "right"
+  }, "Quantity:", _react.default.createElement(_semanticUiReact.Dropdown, {
+    labeled: true,
+    defaultValue: 1,
+    options: options,
+    simple: true,
+    item: true
+  }))))));
 };
 
 var _default = Cart;
