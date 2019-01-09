@@ -1,18 +1,13 @@
 import React from 'react'
 import {Item, Image, Button, Icon, Dropdown, Menu} from 'semantic-ui-react'
 
-const options = [
-  {key: 1, text: '1', value: 1},
-  {key: 2, text: '2', value: 2},
-  {key: 3, text: '3', value: 3},
-  {key: 4, text: '4', value: 4},
-  {key: 5, text: '5', value: 5},
-  {key: 6, text: '6', value: 6},
-  {key: 7, text: '7', value: 7},
-  {key: 8, text: '8', value: 8},
-  {key: 9, text: '9', value: 9},
-  {key: 10, text: '10', value: 10}
-]
+const options = () => {
+  let arr = [];
+  for (let i = 1; i <= 10; i++) {
+    arr.push({key: i, text: i, value: i})
+  }
+  return arr;
+}
 
 const Cart = props => (
   <Item.Group>
@@ -27,7 +22,7 @@ const Cart = props => (
         <Item.Extra>
           <a href="">Remove from Cart</a>
           <Menu compact floated="right">
-            <Dropdown labeled={true} defaultValue={1} options={options} simple item />
+            <Dropdown labeled={true} defaultValue={1} options={options()} simple item />
           </Menu>
         </Item.Extra>
       </Item.Content>
