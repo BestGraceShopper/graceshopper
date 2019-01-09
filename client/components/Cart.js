@@ -26,7 +26,7 @@ const Cart = props => (
         </Item.Description>
         <Item.Extra>
           <a href="">Remove from Cart</a>
-          <Menu compact floated="right">Quantity:
+          <Menu compact floated="right">
             <Dropdown labeled={true} defaultValue={1} options={options} simple item />
           </Menu>
         </Item.Extra>
