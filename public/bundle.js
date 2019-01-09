@@ -625,6 +625,7 @@ var mapSignup = function mapSignup(state) {
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     handleSubmit: function handleSubmit(evt) {
+      console.log(evt.target.name);
       evt.preventDefault();
       var formName = evt.target.name;
       var email = evt.target.email.value;
@@ -1042,6 +1043,12 @@ function (_Component) {
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       return _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+        path: "/login",
+        component: _components.Login
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/signup",
+        component: _components.Signup
+      }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/products",
         component: _ProductList.default
