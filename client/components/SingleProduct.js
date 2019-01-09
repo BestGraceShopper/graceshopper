@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getProduct} from '../store/productReducer'
+import {getProduct} from '../store/reducers/product'
 import {Card, Icon, Image, Button} from 'semantic-ui-react'
 
 class SingleProduct extends Component {

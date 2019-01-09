@@ -300,6 +300,9 @@ var ProductCard = function ProductCard(props) {
   }, _react.default.createElement(_semanticUiReact.Button.Content, {
     visible: true
   }, "View Product")), _react.default.createElement(_semanticUiReact.Button, {
+    onClick: function onClick() {
+      return props.addToCart(props.id);
+    },
     primary: true,
     animated: "vertical"
   }, _react.default.createElement(_semanticUiReact.Button.Content, {
@@ -339,7 +342,7 @@ var _ProductCard = _interopRequireDefault(__webpack_require__(/*! ./ProductCard 
 
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
-var _productReducer = __webpack_require__(/*! ../store/productReducer */ "./client/store/productReducer.js");
+var _product = __webpack_require__(/*! ../store/reducers/product */ "./client/store/reducers/product.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -362,17 +365,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 var mapState = function mapState(state) {
-  console.log(state);
-  console.log(state.productReducer.products);
   return {
-    products: state.productReducer.products
+    products: state.product.products
   };
 };
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     getAllProducts: function getAllProducts() {
-      return dispatch((0, _productReducer.getAllProducts)());
+      return dispatch((0, _product.getAllProducts)());
+    },
+    addToCart: function addToCart(productId) {
+      return dispatch((0, _product.addToCart)(productId));
     }
   };
 };
@@ -392,11 +396,17 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.getAllProducts();
-      console.log(this.props);
+    }
+  }, {
+    key: "handleAddToCart",
+    value: function handleAddToCart(productId) {
+      this.props.addToCart(productId);
     }
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var products = this.props.products; //console.log(products)
 
       return _react.default.createElement(_semanticUiReact.Grid, {
@@ -409,9 +419,10 @@ function (_React$Component) {
           name: product.name,
           price: product.price,
           imageUrl: product.imageUrl,
-          id: product.id
+          id: product.id,
+          addToCart: _this.handleAddToCart.bind(_this)
         }));
-      }), "s");
+      }));
     }
   }]);
 
@@ -443,7 +454,7 @@ var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_mo
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
-var _productReducer = __webpack_require__(/*! ../store/productReducer */ "./client/store/productReducer.js");
+var _product = __webpack_require__(/*! ../store/reducers/product */ "./client/store/reducers/product.js");
 
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
@@ -523,7 +534,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchSingleProduct: function fetchSingleProduct(id) {
-      dispatch((0, _productReducer.getProduct)(id));
+      dispatch((0, _product.getProduct)(id));
     }
   };
 };
@@ -1135,7 +1146,7 @@ var _reduxThunk = _interopRequireDefault(__webpack_require__(/*! redux-thunk */ 
 
 var _reduxDevtoolsExtension = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 
-var _user = _interopRequireWildcard(__webpack_require__(/*! ./user */ "./client/store/user.js"));
+var _user = _interopRequireWildcard(__webpack_require__(/*! ./reducers/user */ "./client/store/reducers/user.js"));
 
 Object.keys(_user).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -1148,7 +1159,7 @@ Object.keys(_user).forEach(function (key) {
   });
 });
 
-var _productReducer = _interopRequireDefault(__webpack_require__(/*! ./productReducer */ "./client/store/productReducer.js"));
+var _product = _interopRequireDefault(__webpack_require__(/*! ./reducers/product */ "./client/store/reducers/product.js"));
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -1156,7 +1167,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var reducer = (0, _redux.combineReducers)({
   user: _user.default,
-  productReducer: _productReducer.default
+  product: _product.default
 });
 var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk.default, (0, _reduxLogger.default)({
   collapsed: true
@@ -1167,10 +1178,10 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ "./client/store/productReducer.js":
-/*!****************************************!*\
-  !*** ./client/store/productReducer.js ***!
-  \****************************************/
+/***/ "./client/store/reducers/product.js":
+/*!******************************************!*\
+  !*** ./client/store/reducers/product.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1181,13 +1192,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
-exports.getProduct = exports.getAllProducts = void 0;
+exports.addToCart = exports.getProduct = exports.getAllProducts = void 0;
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
-var _vm = __webpack_require__(/*! vm */ "./node_modules/vm-browserify/index.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -1198,7 +1215,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var GET_PRODUCTS = 'GET_PRODUCTS';
-var GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'; // action creators
+var GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT';
+var ADD_TO_CART = 'ADD_TO_CART'; // action creators
 
 var getProducts = function getProducts(products) {
   return {
@@ -1212,8 +1230,21 @@ var getSingleProduct = function getSingleProduct(product) {
     type: GET_SINGLE_PRODUCT,
     product: product
   };
-}; // thunks
+};
 
+var addCart = function addCart(productId) {
+  return {
+    type: ADD_TO_CART,
+    productId: productId
+  };
+};
+
+var initialState = {
+  products: [],
+  singleProduct: {},
+  cart: [] // thunks
+
+};
 
 var getAllProducts = function getAllProducts() {
   return (
@@ -1233,7 +1264,7 @@ var getAllProducts = function getAllProducts() {
 
               case 3:
                 res = _context.sent;
-                dispatch(getProducts(res.data || defaultProducts.products));
+                dispatch(getProducts(res.data || initialState.products));
                 _context.next = 10;
                 break;
 
@@ -1302,14 +1333,22 @@ var getProduct = function getProduct(id) {
 };
 
 exports.getProduct = getProduct;
-var defaultProducts = {
-  products: [],
-  singleProduct: {} // the reducer
 
-};
+var addToCart = function addToCart(productId) {
+  return function (dispatch) {
+    try {
+      dispatch(addCart(productId));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}; // the reducer
+
+
+exports.addToCart = addToCart;
 
 function _default() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProducts;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
@@ -1323,6 +1362,11 @@ function _default() {
         singleProduct: action.product
       });
 
+    case ADD_TO_CART:
+      return _objectSpread({}, state, {
+        cart: _toConsumableArray(state.cart).concat([action.productId])
+      });
+
     default:
       return state;
   }
@@ -1330,10 +1374,10 @@ function _default() {
 
 /***/ }),
 
-/***/ "./client/store/user.js":
-/*!******************************!*\
-  !*** ./client/store/user.js ***!
-  \******************************/
+/***/ "./client/store/reducers/user.js":
+/*!***************************************!*\
+  !*** ./client/store/reducers/user.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1348,7 +1392,7 @@ exports.logout = exports.auth = exports.me = void 0;
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
-var _history = _interopRequireDefault(__webpack_require__(/*! ../history */ "./client/history.js"));
+var _history = _interopRequireDefault(__webpack_require__(/*! ../../history */ "./client/history.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -95065,155 +95109,6 @@ function valueEqual(a, b) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (valueEqual);
-
-/***/ }),
-
-/***/ "./node_modules/vm-browserify/index.js":
-/*!*********************************************!*\
-  !*** ./node_modules/vm-browserify/index.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var indexOf = __webpack_require__(/*! indexof */ "./node_modules/indexof/index.js");
-
-var Object_keys = function (obj) {
-    if (Object.keys) return Object.keys(obj)
-    else {
-        var res = [];
-        for (var key in obj) res.push(key)
-        return res;
-    }
-};
-
-var forEach = function (xs, fn) {
-    if (xs.forEach) return xs.forEach(fn)
-    else for (var i = 0; i < xs.length; i++) {
-        fn(xs[i], i, xs);
-    }
-};
-
-var defineProp = (function() {
-    try {
-        Object.defineProperty({}, '_', {});
-        return function(obj, name, value) {
-            Object.defineProperty(obj, name, {
-                writable: true,
-                enumerable: false,
-                configurable: true,
-                value: value
-            })
-        };
-    } catch(e) {
-        return function(obj, name, value) {
-            obj[name] = value;
-        };
-    }
-}());
-
-var globals = ['Array', 'Boolean', 'Date', 'Error', 'EvalError', 'Function',
-'Infinity', 'JSON', 'Math', 'NaN', 'Number', 'Object', 'RangeError',
-'ReferenceError', 'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
-'decodeURI', 'decodeURIComponent', 'encodeURI', 'encodeURIComponent', 'escape',
-'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'undefined', 'unescape'];
-
-function Context() {}
-Context.prototype = {};
-
-var Script = exports.Script = function NodeScript (code) {
-    if (!(this instanceof Script)) return new Script(code);
-    this.code = code;
-};
-
-Script.prototype.runInContext = function (context) {
-    if (!(context instanceof Context)) {
-        throw new TypeError("needs a 'context' argument.");
-    }
-    
-    var iframe = document.createElement('iframe');
-    if (!iframe.style) iframe.style = {};
-    iframe.style.display = 'none';
-    
-    document.body.appendChild(iframe);
-    
-    var win = iframe.contentWindow;
-    var wEval = win.eval, wExecScript = win.execScript;
-
-    if (!wEval && wExecScript) {
-        // win.eval() magically appears when this is called in IE:
-        wExecScript.call(win, 'null');
-        wEval = win.eval;
-    }
-    
-    forEach(Object_keys(context), function (key) {
-        win[key] = context[key];
-    });
-    forEach(globals, function (key) {
-        if (context[key]) {
-            win[key] = context[key];
-        }
-    });
-    
-    var winKeys = Object_keys(win);
-
-    var res = wEval.call(win, this.code);
-    
-    forEach(Object_keys(win), function (key) {
-        // Avoid copying circular objects like `top` and `window` by only
-        // updating existing context properties or new properties in the `win`
-        // that was only introduced after the eval.
-        if (key in context || indexOf(winKeys, key) === -1) {
-            context[key] = win[key];
-        }
-    });
-
-    forEach(globals, function (key) {
-        if (!(key in context)) {
-            defineProp(context, key, win[key]);
-        }
-    });
-    
-    document.body.removeChild(iframe);
-    
-    return res;
-};
-
-Script.prototype.runInThisContext = function () {
-    return eval(this.code); // maybe...
-};
-
-Script.prototype.runInNewContext = function (context) {
-    var ctx = Script.createContext(context);
-    var res = this.runInContext(ctx);
-
-    forEach(Object_keys(ctx), function (key) {
-        context[key] = ctx[key];
-    });
-
-    return res;
-};
-
-forEach(Object_keys(Script.prototype), function (name) {
-    exports[name] = Script[name] = function (code) {
-        var s = Script(code);
-        return s[name].apply(s, [].slice.call(arguments, 1));
-    };
-});
-
-exports.createScript = function (code) {
-    return exports.Script(code);
-};
-
-exports.createContext = Script.createContext = function (context) {
-    var copy = new Context();
-    if(typeof context === 'object') {
-        forEach(Object_keys(context), function (key) {
-            copy[key] = context[key];
-        });
-    }
-    return copy;
-};
-
 
 /***/ }),
 
