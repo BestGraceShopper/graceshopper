@@ -16,7 +16,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-
 router.get('/:id', async (req, res, next) => {
   try {
     const users = await User.findOne({
@@ -24,9 +23,9 @@ router.get('/:id', async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       where: {
-        id: req.params.id,
+        id: req.params.id
       },
-      attributes: ['id', 'email', 'address', 'phone'],
+      attributes: ['id', 'email', 'firstName', 'lastName', 'address', 'phone']
     })
     res.json(users)
   } catch (err) {
