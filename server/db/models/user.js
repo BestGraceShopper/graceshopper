@@ -8,17 +8,26 @@ const User = db.define('user', {
     unique: true,
     allowNull: false
   },
+  firstName: {
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: true
+    }
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: true
+    }
+  },
+  // maybe create new model for adresses only, test with postman
+  // string == address object
+  // for now '123 easy street'
   address: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+    type: Sequelize.STRING
   },
   phone: {
-    type: Sequelize.INTEGER,
-  },
-  payment: {
-    type: Sequelize.INTEGER,
-      validate: {
-        isCreditCard: true,
-      }
+    type: Sequelize.STRING
   },
   password: {
     type: Sequelize.STRING,
@@ -35,10 +44,10 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('salt')
     }
-  },
-  googleId: {
-    type: Sequelize.STRING
   }
+  // googleId: {
+  //   type: Sequelize.STRING
+  // }
 })
 
 module.exports = User
