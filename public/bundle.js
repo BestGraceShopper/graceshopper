@@ -304,7 +304,7 @@ var _ProductCard = _interopRequireDefault(__webpack_require__(/*! ./ProductCard 
 
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
-var _product = __webpack_require__(/*! ../store/product */ "./client/store/product.js");
+var _productReducer = __webpack_require__(/*! ../store/productReducer */ "./client/store/productReducer.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -327,15 +327,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 var mapState = function mapState(state) {
+  console.log(state);
+  console.log(state.productReducer.products);
   return {
-    products: state.products
+    products: state.productReducer.products
   };
 };
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     getAllProducts: function getAllProducts() {
-      return dispatch((0, _product.getAllProducts)());
+      return dispatch((0, _productReducer.getAllProducts)());
     }
   };
 };
@@ -354,7 +356,8 @@ function (_React$Component) {
   _createClass(ProductList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getAllProducts(); // console.log(this.props.products)
+      this.props.getAllProducts();
+      console.log(this.props);
     }
   }, {
     key: "render",
@@ -381,6 +384,116 @@ function (_React$Component) {
 
 var connectedProducts = (0, _reactRedux.connect)(mapState, mapDispatch)(ProductList);
 var _default = connectedProducts;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/components/SingleProduct.js":
+/*!********************************************!*\
+  !*** ./client/components/SingleProduct.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _productReducer = __webpack_require__(/*! ../store/productReducer */ "./client/store/productReducer.js");
+
+var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var SingleProduct =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(SingleProduct, _Component);
+
+  function SingleProduct() {
+    _classCallCheck(this, SingleProduct);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(SingleProduct).apply(this, arguments));
+  }
+
+  _createClass(SingleProduct, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchSingleProduct(this.props.match.params.id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var product = this.props.product;
+      return _react.default.createElement(_semanticUiReact.Card, null, _react.default.createElement(_semanticUiReact.Image, {
+        centered: true,
+        height: 300,
+        width: 300,
+        src: product.imageUrl
+      }), _react.default.createElement(_semanticUiReact.Card.Content, null, _react.default.createElement(_semanticUiReact.Card.Header, null, product.name), _react.default.createElement(_semanticUiReact.Card.Meta, null, _react.default.createElement("span", null, "$", product.price)), _react.default.createElement(_semanticUiReact.Card.Description, null, product.description), _react.default.createElement(_semanticUiReact.Card.Meta, null, product.tags)), _react.default.createElement(_semanticUiReact.Card.Content, {
+        extra: true
+      }, _react.default.createElement("div", {
+        className: "ui two buttons"
+      }, _react.default.createElement(_semanticUiReact.Button, {
+        primary: true,
+        animated: "vertical"
+      }, _react.default.createElement(_semanticUiReact.Button.Content, {
+        hidden: true
+      }, "Add to Cart"), _react.default.createElement(_semanticUiReact.Button.Content, {
+        visible: true
+      }, _react.default.createElement(_semanticUiReact.Icon, {
+        name: "shop"
+      }))))));
+    }
+  }]);
+
+  return SingleProduct;
+}(_react.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  var productReducer = state.productReducer;
+  var singleProduct = productReducer.singleProduct;
+  return {
+    product: singleProduct
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchSingleProduct: function fetchSingleProduct(id) {
+      dispatch((0, _productReducer.getProduct)(id));
+    }
+  };
+};
+
+var SingleProductDetail = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SingleProduct);
+var _default = SingleProductDetail;
 exports.default = _default;
 
 /***/ }),
@@ -830,6 +943,8 @@ var _components = __webpack_require__(/*! ./components */ "./client/components/i
 
 var _ProductList = _interopRequireDefault(__webpack_require__(/*! ./components/ProductList */ "./client/components/ProductList.js"));
 
+var _SingleProduct = _interopRequireDefault(__webpack_require__(/*! ./components/SingleProduct */ "./client/components/SingleProduct.js"));
+
 var _Cart = _interopRequireDefault(__webpack_require__(/*! ./components/Cart */ "./client/components/Cart.js"));
 
 var _store = __webpack_require__(/*! ./store */ "./client/store/index.js");
@@ -880,11 +995,15 @@ function (_Component) {
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       return _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
         path: "/products",
         component: _ProductList.default
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/cart",
         component: _Cart.default
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/products/:id",
+        component: _SingleProduct.default
       }), ")}");
     }
   }]);
@@ -993,7 +1112,7 @@ Object.keys(_user).forEach(function (key) {
   });
 });
 
-var _product = _interopRequireDefault(__webpack_require__(/*! ./product */ "./client/store/product.js"));
+var _productReducer = _interopRequireDefault(__webpack_require__(/*! ./productReducer */ "./client/store/productReducer.js"));
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -1001,7 +1120,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var reducer = (0, _redux.combineReducers)({
   user: _user.default,
-  products: _product.default
+  productReducer: _productReducer.default
 });
 var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk.default, (0, _reduxLogger.default)({
   collapsed: true
@@ -1012,10 +1131,10 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ "./client/store/product.js":
-/*!*********************************!*\
-  !*** ./client/store/product.js ***!
-  \*********************************/
+/***/ "./client/store/productReducer.js":
+/*!****************************************!*\
+  !*** ./client/store/productReducer.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1026,18 +1145,24 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
-exports.getAllProducts = void 0;
+exports.getProduct = exports.getAllProducts = void 0;
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
+var _vm = __webpack_require__(/*! vm */ "./node_modules/vm-browserify/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var GET_PRODUCTS = 'GET_PRODUCTS';
-var defaultProducts = [];
+var GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'; // action creators
 
 var getProducts = function getProducts(products) {
   return {
@@ -1045,6 +1170,14 @@ var getProducts = function getProducts(products) {
     products: products
   };
 };
+
+var getSingleProduct = function getSingleProduct(product) {
+  return {
+    type: GET_SINGLE_PRODUCT,
+    product: product
+  };
+}; // thunks
+
 
 var getAllProducts = function getAllProducts() {
   return (
@@ -1064,7 +1197,7 @@ var getAllProducts = function getAllProducts() {
 
               case 3:
                 res = _context.sent;
-                dispatch(getProducts(res.data || defaultProducts));
+                dispatch(getProducts(res.data || defaultProducts.products));
                 _context.next = 10;
                 break;
 
@@ -1090,13 +1223,69 @@ var getAllProducts = function getAllProducts() {
 
 exports.getAllProducts = getAllProducts;
 
+var getProduct = function getProduct(id) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(dispatch) {
+        var res;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _axios.default.get("/api/products/".concat(id));
+
+              case 3:
+                res = _context2.sent;
+                dispatch(getSingleProduct(res.data || 'product not found'));
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 7]]);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+exports.getProduct = getProduct;
+var defaultProducts = {
+  products: [],
+  singleProduct: {} // the reducer
+
+};
+
 function _default() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultProducts;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case GET_PRODUCTS:
-      return action.products;
+      return _objectSpread({}, state, {
+        products: action.products
+      });
+
+    case GET_SINGLE_PRODUCT:
+      return _objectSpread({}, state, {
+        singleProduct: action.product
+      });
 
     default:
       return state;
@@ -94840,6 +95029,155 @@ function valueEqual(a, b) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (valueEqual);
+
+/***/ }),
+
+/***/ "./node_modules/vm-browserify/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/vm-browserify/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var indexOf = __webpack_require__(/*! indexof */ "./node_modules/indexof/index.js");
+
+var Object_keys = function (obj) {
+    if (Object.keys) return Object.keys(obj)
+    else {
+        var res = [];
+        for (var key in obj) res.push(key)
+        return res;
+    }
+};
+
+var forEach = function (xs, fn) {
+    if (xs.forEach) return xs.forEach(fn)
+    else for (var i = 0; i < xs.length; i++) {
+        fn(xs[i], i, xs);
+    }
+};
+
+var defineProp = (function() {
+    try {
+        Object.defineProperty({}, '_', {});
+        return function(obj, name, value) {
+            Object.defineProperty(obj, name, {
+                writable: true,
+                enumerable: false,
+                configurable: true,
+                value: value
+            })
+        };
+    } catch(e) {
+        return function(obj, name, value) {
+            obj[name] = value;
+        };
+    }
+}());
+
+var globals = ['Array', 'Boolean', 'Date', 'Error', 'EvalError', 'Function',
+'Infinity', 'JSON', 'Math', 'NaN', 'Number', 'Object', 'RangeError',
+'ReferenceError', 'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
+'decodeURI', 'decodeURIComponent', 'encodeURI', 'encodeURIComponent', 'escape',
+'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'undefined', 'unescape'];
+
+function Context() {}
+Context.prototype = {};
+
+var Script = exports.Script = function NodeScript (code) {
+    if (!(this instanceof Script)) return new Script(code);
+    this.code = code;
+};
+
+Script.prototype.runInContext = function (context) {
+    if (!(context instanceof Context)) {
+        throw new TypeError("needs a 'context' argument.");
+    }
+    
+    var iframe = document.createElement('iframe');
+    if (!iframe.style) iframe.style = {};
+    iframe.style.display = 'none';
+    
+    document.body.appendChild(iframe);
+    
+    var win = iframe.contentWindow;
+    var wEval = win.eval, wExecScript = win.execScript;
+
+    if (!wEval && wExecScript) {
+        // win.eval() magically appears when this is called in IE:
+        wExecScript.call(win, 'null');
+        wEval = win.eval;
+    }
+    
+    forEach(Object_keys(context), function (key) {
+        win[key] = context[key];
+    });
+    forEach(globals, function (key) {
+        if (context[key]) {
+            win[key] = context[key];
+        }
+    });
+    
+    var winKeys = Object_keys(win);
+
+    var res = wEval.call(win, this.code);
+    
+    forEach(Object_keys(win), function (key) {
+        // Avoid copying circular objects like `top` and `window` by only
+        // updating existing context properties or new properties in the `win`
+        // that was only introduced after the eval.
+        if (key in context || indexOf(winKeys, key) === -1) {
+            context[key] = win[key];
+        }
+    });
+
+    forEach(globals, function (key) {
+        if (!(key in context)) {
+            defineProp(context, key, win[key]);
+        }
+    });
+    
+    document.body.removeChild(iframe);
+    
+    return res;
+};
+
+Script.prototype.runInThisContext = function () {
+    return eval(this.code); // maybe...
+};
+
+Script.prototype.runInNewContext = function (context) {
+    var ctx = Script.createContext(context);
+    var res = this.runInContext(ctx);
+
+    forEach(Object_keys(ctx), function (key) {
+        context[key] = ctx[key];
+    });
+
+    return res;
+};
+
+forEach(Object_keys(Script.prototype), function (name) {
+    exports[name] = Script[name] = function (code) {
+        var s = Script(code);
+        return s[name].apply(s, [].slice.call(arguments, 1));
+    };
+});
+
+exports.createScript = function (code) {
+    return exports.Script(code);
+};
+
+exports.createContext = Script.createContext = function (context) {
+    var copy = new Context();
+    if(typeof context === 'object') {
+        forEach(Object_keys(context), function (key) {
+            copy[key] = context[key];
+        });
+    }
+    return copy;
+};
+
 
 /***/ }),
 
