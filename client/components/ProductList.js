@@ -28,7 +28,11 @@ class ProductList extends React.Component {
       <Grid relaxed columns={3}>
         {products.map(product => (
           <Grid.Column key={product.id}>
-            <ProductCard />
+            <ProductCard
+              name={product.name}
+              price={product.price}
+              imageUrl={product.imageUrl}
+            />
           </Grid.Column>
         ))}
       </Grid>
