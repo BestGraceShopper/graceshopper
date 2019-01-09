@@ -18,6 +18,7 @@ export default class App extends Component {
             as={Link}
             to="/home"
             name="home"
+            icon="home"
             active={activeItem === 'home'}
             onClick={this.handleItemClick}
           />
@@ -25,6 +26,7 @@ export default class App extends Component {
             as={Link}
             to="/products"
             name="products"
+            icon="child"
             active={activeItem === 'products'}
             onClick={this.handleItemClick}
           />
@@ -33,6 +35,7 @@ export default class App extends Component {
             to="/cart"
             position="right"
             name="cart"
+            icon="shopping cart"
             active={activeItem === 'cart'}
             onClick={this.handleItemClick}
           />
