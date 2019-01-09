@@ -34,9 +34,10 @@ class ProductList extends React.Component {
               name={product.name}
               price={product.price}
               imageUrl={product.imageUrl}
+              id={product.id}
             />
           </Grid.Column>
-        ))}
+        ))}s
       </Grid>
     )
   }

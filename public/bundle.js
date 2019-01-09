@@ -280,6 +280,8 @@ var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_mod
 
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ProductCard = function ProductCard(props) {
@@ -292,9 +294,12 @@ var ProductCard = function ProductCard(props) {
     extra: true
   }, _react.default.createElement("div", {
     className: "ui two buttons"
-  }, _react.default.createElement(_semanticUiReact.Button, null, _react.default.createElement(_semanticUiReact.Button.Content, {
+  }, _react.default.createElement(_semanticUiReact.Button, {
+    as: _reactRouterDom.Link,
+    to: "/products/".concat(props.id)
+  }, _react.default.createElement(_semanticUiReact.Button.Content, {
     visible: true
-  }, "Product Page")), _react.default.createElement(_semanticUiReact.Button, {
+  }, "View Product")), _react.default.createElement(_semanticUiReact.Button, {
     primary: true,
     animated: "vertical"
   }, _react.default.createElement(_semanticUiReact.Button.Content, {
@@ -403,9 +408,10 @@ function (_React$Component) {
         }, _react.default.createElement(_ProductCard.default, {
           name: product.name,
           price: product.price,
-          imageUrl: product.imageUrl
+          imageUrl: product.imageUrl,
+          id: product.id
         }));
-      }));
+      }), "s");
     }
   }]);
 
