@@ -223,7 +223,116 @@ var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_mod
 
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
+var _CartItem = _interopRequireDefault(__webpack_require__(/*! ./CartItem */ "./client/components/CartItem.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _product = __webpack_require__(/*! ../store/reducers/product */ "./client/store/reducers/product.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Cart =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Cart, _React$Component);
+
+  function Cart() {
+    _classCallCheck(this, Cart);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Cart).apply(this, arguments));
+  }
+
+  _createClass(Cart, [{
+    key: "render",
+    value: function render() {
+      var cart = this.props.cart;
+      return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Item.Group, null, cart.map(function (item, idx) {
+        return _react.default.createElement(_CartItem.default, {
+          product: item,
+          key: idx
+        });
+      })));
+    }
+  }]);
+
+  return Cart;
+}(_react.default.Component);
+
+var mapState = function mapState(state) {
+  return {
+    cart: state.product.cart
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    fetchSingleProduct: function fetchSingleProduct(id) {
+      dispatch((0, _product.getProduct)(id));
+    }
+  };
+};
+
+var connectedCart = (0, _reactRedux.connect)(mapState, mapDispatch)(Cart);
+var _default = connectedCart;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/components/CartItem.js":
+/*!***************************************!*\
+  !*** ./client/components/CartItem.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CartItem = function CartItem(props) {
+  return _react.default.createElement(_semanticUiReact.Item, null, _react.default.createElement(_semanticUiReact.Item.Image, {
+    src: props.product.imageUrl
+  }), _react.default.createElement(_semanticUiReact.Item.Content, null, _react.default.createElement(_semanticUiReact.Item.Header, null, props.product.name), _react.default.createElement(_semanticUiReact.Item.Meta, null, props.product.price), _react.default.createElement(_semanticUiReact.Item.Description, null, _react.default.createElement("span", null, props.product.description)), _react.default.createElement(_semanticUiReact.Item.Extra, null, _react.default.createElement("a", {
+    href: ""
+  }, "Remove from Cart"), _react.default.createElement(_semanticUiReact.Menu, {
+    compact: true,
+    floated: "right"
+  }, _react.default.createElement(_semanticUiReact.Dropdown, {
+    labeled: true,
+    defaultValue: 1,
+    options: options(),
+    simple: true,
+    item: true
+  })))));
+};
 
 var options = function options() {
   var arr = [];
@@ -239,24 +348,7 @@ var options = function options() {
   return arr;
 };
 
-var Cart = function Cart(props) {
-  return _react.default.createElement(_semanticUiReact.Item.Group, null, _react.default.createElement(_semanticUiReact.Item, null, _react.default.createElement(_semanticUiReact.Item.Image, {
-    src: "https://react.semantic-ui.com/images/wireframe/image.png"
-  }), _react.default.createElement(_semanticUiReact.Item.Content, null, _react.default.createElement(_semanticUiReact.Item.Header, null, "Item Name"), _react.default.createElement(_semanticUiReact.Item.Meta, null, "$3050.00"), _react.default.createElement(_semanticUiReact.Item.Description, null, _react.default.createElement("span", null, "Description........")), _react.default.createElement(_semanticUiReact.Item.Extra, null, _react.default.createElement("a", {
-    href: ""
-  }, "Remove from Cart"), _react.default.createElement(_semanticUiReact.Menu, {
-    compact: true,
-    floated: "right"
-  }, _react.default.createElement(_semanticUiReact.Dropdown, {
-    labeled: true,
-    defaultValue: 1,
-    options: options(),
-    simple: true,
-    item: true
-  }))))));
-};
-
-var _default = Cart;
+var _default = CartItem;
 exports.default = _default;
 
 /***/ }),
@@ -289,19 +381,19 @@ var ProductCard = function ProductCard(props) {
     centered: true,
     height: 150,
     width: 150,
-    src: props.imageUrl
-  }), _react.default.createElement(_semanticUiReact.Card.Content, null, _react.default.createElement(_semanticUiReact.Card.Header, null, props.name), _react.default.createElement(_semanticUiReact.Card.Meta, null, _react.default.createElement("span", null, "$", props.price))), _react.default.createElement(_semanticUiReact.Card.Content, {
+    src: props.product.imageUrl
+  }), _react.default.createElement(_semanticUiReact.Card.Content, null, _react.default.createElement(_semanticUiReact.Card.Header, null, props.product.name), _react.default.createElement(_semanticUiReact.Card.Meta, null, _react.default.createElement("span", null, "$", props.product.price))), _react.default.createElement(_semanticUiReact.Card.Content, {
     extra: true
   }, _react.default.createElement("div", {
     className: "ui two buttons"
   }, _react.default.createElement(_semanticUiReact.Button, {
     as: _reactRouterDom.Link,
-    to: "/products/".concat(props.id)
+    to: "/products/".concat(props.product.id)
   }, _react.default.createElement(_semanticUiReact.Button.Content, {
     visible: true
   }, "View Product")), _react.default.createElement(_semanticUiReact.Button, {
     onClick: function onClick() {
-      return props.addToCart(props.id);
+      return props.addToCart(props.product);
     },
     primary: true,
     animated: "vertical"
@@ -375,8 +467,8 @@ var mapDispatch = function mapDispatch(dispatch) {
     getAllProducts: function getAllProducts() {
       return dispatch((0, _product.getAllProducts)());
     },
-    addToCart: function addToCart(productId) {
-      return dispatch((0, _product.addToCart)(productId));
+    addToCart: function addToCart(product) {
+      return dispatch((0, _product.addToCart)(product));
     }
   };
 };
@@ -399,8 +491,8 @@ function (_React$Component) {
     }
   }, {
     key: "handleAddToCart",
-    value: function handleAddToCart(productId) {
-      this.props.addToCart(productId);
+    value: function handleAddToCart(product) {
+      this.props.addToCart(product);
     }
   }, {
     key: "render",
@@ -416,10 +508,7 @@ function (_React$Component) {
         return _react.default.createElement(_semanticUiReact.Grid.Column, {
           key: product.id
         }, _react.default.createElement(_ProductCard.default, {
-          name: product.name,
-          price: product.price,
-          imageUrl: product.imageUrl,
-          id: product.id,
+          product: product,
           addToCart: _this.handleAddToCart.bind(_this)
         }));
       }));
@@ -524,8 +613,7 @@ function (_Component) {
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-  var productReducer = state.productReducer;
-  var singleProduct = productReducer.singleProduct;
+  var singleProduct = state.product.singleProduct;
   return {
     product: singleProduct
   };
@@ -1216,7 +1304,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var GET_PRODUCTS = 'GET_PRODUCTS';
 var GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT';
-var ADD_TO_CART = 'ADD_TO_CART'; // action creators
+var ADD_TO_CART = 'ADD_TO_CART'; // const SET_QUANTITY = 'SET_QUANTITY'
+// action creators
 
 var getProducts = function getProducts(products) {
   return {
@@ -1232,12 +1321,13 @@ var getSingleProduct = function getSingleProduct(product) {
   };
 };
 
-var addCart = function addCart(productId) {
+var addCart = function addCart(product) {
   return {
     type: ADD_TO_CART,
-    productId: productId
+    product: product
   };
-};
+}; // const setQuantity = (productId, quantity) => ({type: SET_QUANTITY, productId, quantity})
+
 
 var initialState = {
   products: [],
@@ -1334,10 +1424,10 @@ var getProduct = function getProduct(id) {
 
 exports.getProduct = getProduct;
 
-var addToCart = function addToCart(productId) {
+var addToCart = function addToCart(product) {
   return function (dispatch) {
     try {
-      dispatch(addCart(productId));
+      dispatch(addCart(product));
     } catch (error) {
       console.error(error);
     }
@@ -1363,8 +1453,16 @@ function _default() {
       });
 
     case ADD_TO_CART:
+      action.product.quantity = 1;
       return _objectSpread({}, state, {
-        cart: _toConsumableArray(state.cart).concat([action.productId])
+        cart: _toConsumableArray(state.cart).concat([action.product]) // case SET_QUANTITY:
+        //   products = state.products.map(product => {
+        //     if(product.id === action.productId)
+        //       return {...product, quantity: action.quantity}
+        //     else return product
+        //   })
+        //   return {...state, product}
+
       });
 
     default:
