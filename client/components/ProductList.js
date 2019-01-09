@@ -2,11 +2,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import ProductCard from './ProductCard'
 import {Grid} from 'semantic-ui-react'
-import {getAllProducts} from '../store/product'
+import {getAllProducts} from '../store/productReducer'
 
 const mapState = state => {
+  console.log(state)
+  console.log(state.productReducer.products)
   return {
-    products: state.products
+    products: state.productReducer.products
   }
 }
 
@@ -19,7 +21,7 @@ const mapDispatch = dispatch => {
 class ProductList extends React.Component {
   componentDidMount() {
     this.props.getAllProducts()
-    // console.log(this.props.products)
+    console.log(this.props)
   }
   render() {
     const products = this.props.products
