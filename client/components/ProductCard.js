@@ -1,5 +1,6 @@
 import React from 'react'
 import {Card, Icon, Image, Button} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 const ProductCard = props => (
   <Card>
@@ -12,8 +13,8 @@ const ProductCard = props => (
     </Card.Content>
     <Card.Content extra>
       <div className="ui two buttons">
-        <Button>
-          <Button.Content visible>Product Page</Button.Content>
+        <Button as={Link} to={`/products/${props.id}`}>
+          <Button.Content visible>View Product</Button.Content>
         </Button>
         <Button primary animated="vertical">
           <Button.Content hidden>Add to Cart</Button.Content>
