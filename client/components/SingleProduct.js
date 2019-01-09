@@ -36,8 +36,7 @@ class SingleProduct extends Component {
 }
 
 const mapStateToProps = state => {
-  const {productReducer} = state
-  const {singleProduct} = productReducer
+  const {singleProduct} = state.product
   return {product: singleProduct}
 }
 
