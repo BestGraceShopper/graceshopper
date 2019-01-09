@@ -16,7 +16,7 @@ const ProductCard = props => (
         <Button as={Link} to={`/products/${props.id}`}>
           <Button.Content visible>View Product</Button.Content>
         </Button>
-        <Button primary animated="vertical">
+        <Button  onClick={() => props.addToCart(props.id)} primary animated="vertical">
           <Button.Content hidden>Add to Cart</Button.Content>
           <Button.Content visible>
             <Icon name="shop" />
