@@ -4,14 +4,10 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
 import {me} from './store'
-import {
-  Cart,
-  SingleProduct,
-  ProductList,
-  Login,
-  Signup,
-  UserHome
-} from './components'
+
+import Cart from './components/Cart'
+import SingleProduct from './components/SingleProduct'
+import ProductList from './components/ProductList'
 
 class Routes extends Component {
   componentDidMount() {

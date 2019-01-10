@@ -103,11 +103,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
 var _routes = _interopRequireDefault(__webpack_require__(/*! ./routes */ "./client/routes.js"));
-
-var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -219,17 +219,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
 var _CartItem = _interopRequireDefault(__webpack_require__(/*! ./CartItem */ "./client/components/CartItem.js"));
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
 var _product = __webpack_require__(/*! ../store/reducers/product */ "./client/store/reducers/product.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -251,8 +253,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var Cart =
 /*#__PURE__*/
-function (_React$Component) {
-  _inherits(Cart, _React$Component);
+function (_Component) {
+  _inherits(Cart, _Component);
 
   function Cart() {
     _classCallCheck(this, Cart);
@@ -274,15 +276,15 @@ function (_React$Component) {
   }]);
 
   return Cart;
-}(_react.default.Component);
+}(_react.Component);
 
-var mapState = function mapState(state) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
     cart: state.product.cart
   };
 };
 
-var mapDispatch = function mapDispatch(dispatch) {
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchSingleProduct: function fetchSingleProduct(id) {
       dispatch((0, _product.getProduct)(id));
@@ -290,8 +292,8 @@ var mapDispatch = function mapDispatch(dispatch) {
   };
 };
 
-var connectedCart = (0, _reactRedux.connect)(mapState, mapDispatch)(Cart);
-var _default = connectedCart;
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Cart);
+
 exports.default = _default;
 
 /***/ }),
@@ -370,9 +372,9 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
-
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -426,17 +428,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
-var _ProductCard = _interopRequireDefault(__webpack_require__(/*! ./ProductCard */ "./client/components/ProductCard.js"));
-
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
+
+var _ProductCard = _interopRequireDefault(__webpack_require__(/*! ./ProductCard */ "./client/components/ProductCard.js"));
 
 var _product = __webpack_require__(/*! ../store/reducers/product */ "./client/store/reducers/product.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -456,27 +460,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var mapState = function mapState(state) {
-  return {
-    products: state.product.products
-  };
-};
-
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    getAllProducts: function getAllProducts() {
-      return dispatch((0, _product.getAllProducts)());
-    },
-    addToCart: function addToCart(product) {
-      return dispatch((0, _product.addToCart)(product));
-    }
-  };
-};
-
 var ProductList =
 /*#__PURE__*/
-function (_React$Component) {
-  _inherits(ProductList, _React$Component);
+function (_Component) {
+  _inherits(ProductList, _Component);
 
   function ProductList() {
     _classCallCheck(this, ProductList);
@@ -499,8 +486,7 @@ function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var products = this.props.products; //console.log(products)
-
+      var products = this.props.products;
       return _react.default.createElement(_semanticUiReact.Grid, {
         relaxed: true,
         columns: 3
@@ -516,10 +502,28 @@ function (_React$Component) {
   }]);
 
   return ProductList;
-}(_react.default.Component);
+}(_react.Component);
 
-var connectedProducts = (0, _reactRedux.connect)(mapState, mapDispatch)(ProductList);
-var _default = connectedProducts;
+var mapStateToProps = function mapStateToProps(state) {
+  console.log(state);
+  return {
+    products: state.product.products
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getAllProducts: function getAllProducts() {
+      return dispatch((0, _product.getAllProducts)());
+    },
+    addToCart: function addToCart(product) {
+      return dispatch((0, _product.addToCart)(product));
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProductList);
+
 exports.default = _default;
 
 /***/ }),
@@ -543,9 +547,9 @@ var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_mo
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
-var _product = __webpack_require__(/*! ../store/reducers/product */ "./client/store/reducers/product.js");
-
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
+
+var _product = __webpack_require__(/*! ../store/reducers/product */ "./client/store/reducers/product.js");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -627,363 +631,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var SingleProductDetail = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SingleProduct);
-var _default = SingleProductDetail;
-exports.default = _default;
-
-/***/ }),
-
-/***/ "./client/components/auth-form.js":
-/*!****************************************!*\
-  !*** ./client/components/auth-form.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Signup = exports.Login = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
-
-var _store = __webpack_require__(/*! ../store */ "./client/store/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * COMPONENT
- */
-var AuthForm = function AuthForm(props) {
-  var name = props.name,
-      displayName = props.displayName,
-      handleSubmit = props.handleSubmit,
-      error = props.error;
-  return _react.default.createElement("div", null, _react.default.createElement("form", {
-    onSubmit: handleSubmit,
-    name: name
-  }, _react.default.createElement("div", null, _react.default.createElement("label", {
-    htmlFor: "email"
-  }, _react.default.createElement("small", null, "Email")), _react.default.createElement("input", {
-    name: "email",
-    type: "text"
-  })), _react.default.createElement("div", null, _react.default.createElement("label", {
-    htmlFor: "password"
-  }, _react.default.createElement("small", null, "Password")), _react.default.createElement("input", {
-    name: "password",
-    type: "password"
-  })), _react.default.createElement("div", null, _react.default.createElement("button", {
-    type: "submit"
-  }, displayName)), error && error.response && _react.default.createElement("div", null, " ", error.response.data, " ")), _react.default.createElement("a", {
-    href: "/auth/google"
-  }, displayName, " with Google"));
-};
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
-
-
-var mapLogin = function mapLogin(state) {
-  return {
-    name: 'login',
-    displayName: 'Login',
-    error: state.user.error
-  };
-};
-
-var mapSignup = function mapSignup(state) {
-  return {
-    name: 'signup',
-    displayName: 'Sign Up',
-    error: state.user.error
-  };
-};
-
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    handleSubmit: function handleSubmit(evt) {
-      evt.preventDefault();
-      var formName = evt.target.name;
-      var email = evt.target.email.value;
-      var password = evt.target.password.value;
-      dispatch((0, _store.auth)(email, password, formName));
-    }
-  };
-};
-
-var Login = (0, _reactRedux.connect)(mapLogin, mapDispatch)(AuthForm);
-exports.Login = Login;
-var Signup = (0, _reactRedux.connect)(mapSignup, mapDispatch)(AuthForm);
-/**
- * PROP TYPES
- */
-
-exports.Signup = Signup;
-AuthForm.propTypes = {
-  name: _propTypes.default.string.isRequired,
-  displayName: _propTypes.default.string.isRequired,
-  handleSubmit: _propTypes.default.func.isRequired,
-  error: _propTypes.default.object
-};
-
-/***/ }),
-
-/***/ "./client/components/index.js":
-/*!************************************!*\
-  !*** ./client/components/index.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "Navbar", {
-  enumerable: true,
-  get: function get() {
-    return _navbar.default;
-  }
-});
-Object.defineProperty(exports, "UserHome", {
-  enumerable: true,
-  get: function get() {
-    return _userHome.default;
-  }
-});
-Object.defineProperty(exports, "Login", {
-  enumerable: true,
-  get: function get() {
-    return _authForm.Login;
-  }
-});
-Object.defineProperty(exports, "Signup", {
-  enumerable: true,
-  get: function get() {
-    return _authForm.Signup;
-  }
-});
-
-var _navbar = _interopRequireDefault(__webpack_require__(/*! ./navbar */ "./client/components/navbar.js"));
-
-var _userHome = _interopRequireDefault(__webpack_require__(/*! ./user-home */ "./client/components/user-home.js"));
-
-var _authForm = __webpack_require__(/*! ./auth-form */ "./client/components/auth-form.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-
-/***/ "./client/components/navbar.js":
-/*!*************************************!*\
-  !*** ./client/components/navbar.js ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var Navbar =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Navbar, _Component);
-
-  function Navbar() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, Navbar);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Navbar)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      activeItem: 'home'
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleItemClick", function (e, _ref) {
-      var name = _ref.name;
-      return _this.setState({
-        activeItem: name
-      });
-    });
-
-    return _this;
-  }
-
-  _createClass(Navbar, [{
-    key: "render",
-    value: function render() {
-      var activeItem = this.state.activeItem;
-      return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Menu, {
-        pointing: true
-      }, _react.default.createElement(_semanticUiReact.Menu.Item, {
-        name: "home",
-        active: activeItem === 'home',
-        onClick: this.handleItemClick
-      })));
-    }
-  }]);
-
-  return Navbar;
-}(_react.Component); // import PropTypes from 'prop-types'
-// import {connect} from 'react-redux'
-// import {Link} from 'react-router-dom'
-// import {logout} from '../store'
-// const Navbar = ({handleClick, isLoggedIn}) => (
-//   <div>
-//     <h1>BOILERMAKER</h1>
-//     <nav>
-//       {isLoggedIn ? (
-//         <div>
-//           {/* The navbar will show these links after you log in */}
-//           <Link to="/home">Home</Link>
-//           <a href="#" onClick={handleClick}>
-//             Logout
-//           </a>
-//         </div>
-//       ) : (
-//         <div>
-//           {/* The navbar will show these links before you log in */}
-//           <Link to="/login">Login</Link>
-//           <Link to="/signup">Sign Up</Link>
-//         </div>
-//       )}
-//     </nav>
-//     <hr />
-//   </div>
-// )
-// /**
-//  * CONTAINER
-//  */
-// const mapState = state => {
-//   return {
-//     isLoggedIn: !!state.user.id
-//   }
-// }
-// const mapDispatch = dispatch => {
-//   return {
-//     handleClick() {
-//       dispatch(logout())
-//     }
-//   }
-// }
-// export default connect(mapState, mapDispatch)(Navbar)
-// /**
-//  * PROP TYPES
-//  */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired
-// }
-
-
-exports.default = Navbar;
-
-/***/ }),
-
-/***/ "./client/components/user-home.js":
-/*!****************************************!*\
-  !*** ./client/components/user-home.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = exports.UserHome = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * COMPONENT
- */
-var UserHome = function UserHome(props) {
-  var email = props.email;
-  return _react.default.createElement("div", null, _react.default.createElement("h3", null, "Welcome, ", email));
-};
-/**
- * CONTAINER
- */
-
-
-exports.UserHome = UserHome;
-
-var mapState = function mapState(state) {
-  return {
-    email: state.user.email
-  };
-};
-
-var _default = (0, _reactRedux.connect)(mapState)(UserHome);
-/**
- * PROP TYPES
- */
-
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SingleProduct);
 
 exports.default = _default;
-UserHome.propTypes = {
-  email: _propTypes.default.string
-};
 
 /***/ }),
 
@@ -1028,15 +678,15 @@ var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_mod
 
 var _reactDom = _interopRequireDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
-var _history = _interopRequireDefault(__webpack_require__(/*! ./history */ "./client/history.js"));
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _app = _interopRequireDefault(__webpack_require__(/*! ./app */ "./client/app.js"));
 
 var _store = _interopRequireDefault(__webpack_require__(/*! ./store */ "./client/store/index.js"));
 
-var _app = _interopRequireDefault(__webpack_require__(/*! ./app */ "./client/app.js"));
+var _history = _interopRequireDefault(__webpack_require__(/*! ./history */ "./client/history.js"));
 
 __webpack_require__(/*! ./socket */ "./client/socket.js");
 
@@ -1068,21 +718,19 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
-var _components = __webpack_require__(/*! ./components */ "./client/components/index.js");
-
-var _ProductList = _interopRequireDefault(__webpack_require__(/*! ./components/ProductList */ "./client/components/ProductList.js"));
-
-var _SingleProduct = _interopRequireDefault(__webpack_require__(/*! ./components/SingleProduct */ "./client/components/SingleProduct.js"));
+var _store = __webpack_require__(/*! ./store */ "./client/store/index.js");
 
 var _Cart = _interopRequireDefault(__webpack_require__(/*! ./components/Cart */ "./client/components/Cart.js"));
 
-var _store = __webpack_require__(/*! ./store */ "./client/store/index.js");
+var _SingleProduct = _interopRequireDefault(__webpack_require__(/*! ./components/SingleProduct */ "./client/components/SingleProduct.js"));
+
+var _ProductList = _interopRequireDefault(__webpack_require__(/*! ./components/ProductList */ "./client/components/ProductList.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1106,9 +754,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-/**
- * COMPONENT
- */
 var Routes =
 /*#__PURE__*/
 function (_Component) {
@@ -1145,12 +790,8 @@ function (_Component) {
 
   return Routes;
 }(_react.Component);
-/**
- * CONTAINER
- */
 
-
-var mapState = function mapState(state) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
@@ -1158,17 +799,15 @@ var mapState = function mapState(state) {
   };
 };
 
-var mapDispatch = function mapDispatch(dispatch) {
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     loadInitialData: function loadInitialData() {
       dispatch((0, _store.me)());
     }
   };
-}; // The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
+};
 
-
-var _default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(Routes));
+var _default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Routes));
 /**
  * PROP TYPES
  */
@@ -1253,6 +892,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import {user, product} from './reducers'
 var reducer = (0, _redux.combineReducers)({
   user: _user.default,
   product: _product.default
@@ -1305,7 +945,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var GET_PRODUCTS = 'GET_PRODUCTS';
 var GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT';
 var ADD_TO_CART = 'ADD_TO_CART'; // const SET_QUANTITY = 'SET_QUANTITY'
-// action creators
 
 var getProducts = function getProducts(products) {
   return {
@@ -1329,13 +968,6 @@ var addCart = function addCart(product) {
 }; // const setQuantity = (productId, quantity) => ({type: SET_QUANTITY, productId, quantity})
 
 
-var initialState = {
-  products: [],
-  singleProduct: {},
-  cart: [] // thunks
-
-};
-
 var getAllProducts = function getAllProducts() {
   return (
     /*#__PURE__*/
@@ -1343,7 +975,8 @@ var getAllProducts = function getAllProducts() {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(dispatch) {
-        var res;
+        var _ref2, data;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1353,22 +986,23 @@ var getAllProducts = function getAllProducts() {
                 return _axios.default.get('/api/products');
 
               case 3:
-                res = _context.sent;
-                dispatch(getProducts(res.data || initialState.products));
-                _context.next = 10;
+                _ref2 = _context.sent;
+                data = _ref2.data;
+                dispatch(getProducts(data || initialState.products));
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 8]]);
       }));
 
       return function (_x) {
@@ -1384,10 +1018,11 @@ var getProduct = function getProduct(id) {
   return (
     /*#__PURE__*/
     function () {
-      var _ref2 = _asyncToGenerator(
+      var _ref3 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
-        var res;
+        var _ref4, data;
+
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -1397,26 +1032,27 @@ var getProduct = function getProduct(id) {
                 return _axios.default.get("/api/products/".concat(id));
 
               case 3:
-                res = _context2.sent;
-                dispatch(getSingleProduct(res.data || 'product not found'));
-                _context2.next = 10;
+                _ref4 = _context2.sent;
+                data = _ref4.data;
+                dispatch(getSingleProduct(data || 'product not found'));
+                _context2.next = 11;
                 break;
 
-              case 7:
-                _context2.prev = 7;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 7]]);
+        }, _callee2, this, [[0, 8]]);
       }));
 
       return function (_x2) {
-        return _ref2.apply(this, arguments);
+        return _ref3.apply(this, arguments);
       };
     }()
   );
@@ -1432,10 +1068,14 @@ var addToCart = function addToCart(product) {
       console.error(error);
     }
   };
-}; // the reducer
-
+};
 
 exports.addToCart = addToCart;
+var initialState = {
+  products: [],
+  singleProduct: {},
+  cart: []
+};
 
 function _default() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -1498,19 +1138,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-/**
- * ACTION TYPES
- */
 var GET_USER = 'GET_USER';
 var REMOVE_USER = 'REMOVE_USER';
-/**
- * INITIAL STATE
- */
-
-var defaultUser = {};
-/**
- * ACTION CREATORS
- */
 
 var getUser = function getUser(user) {
   return {
@@ -1524,10 +1153,6 @@ var removeUser = function removeUser() {
     type: REMOVE_USER
   };
 };
-/**
- * THUNK CREATORS
- */
-
 
 var me = function me() {
   return (
@@ -1536,7 +1161,8 @@ var me = function me() {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(dispatch) {
-        var res;
+        var _ref2, data;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1546,22 +1172,23 @@ var me = function me() {
                 return _axios.default.get('/auth/me');
 
               case 3:
-                res = _context.sent;
-                dispatch(getUser(res.data || defaultUser));
-                _context.next = 10;
+                _ref2 = _context.sent;
+                data = _ref2.data;
+                dispatch(getUser(data || defaultUser));
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 8]]);
       }));
 
       return function (_x) {
@@ -1577,7 +1204,7 @@ var auth = function auth(email, password, method) {
   return (
     /*#__PURE__*/
     function () {
-      var _ref2 = _asyncToGenerator(
+      var _ref3 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
         var res;
@@ -1622,7 +1249,7 @@ var auth = function auth(email, password, method) {
       }));
 
       return function (_x2) {
-        return _ref2.apply(this, arguments);
+        return _ref3.apply(this, arguments);
       };
     }()
   );
@@ -1634,7 +1261,7 @@ var logout = function logout() {
   return (
     /*#__PURE__*/
     function () {
-      var _ref3 = _asyncToGenerator(
+      var _ref4 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee3(dispatch) {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -1667,17 +1294,14 @@ var logout = function logout() {
       }));
 
       return function (_x3) {
-        return _ref3.apply(this, arguments);
+        return _ref4.apply(this, arguments);
       };
     }()
   );
 };
-/**
- * REDUCER
- */
-
 
 exports.logout = logout;
+var defaultUser = {};
 
 function _default() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultUser;
