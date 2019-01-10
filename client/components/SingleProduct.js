@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getProduct} from '../store/reducers/product'
 import {Card, Icon, Image, Button} from 'semantic-ui-react'
+
+import {getProduct} from '../store/reducers/product'
 
 class SingleProduct extends Component {
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id)
   }
+
   render() {
     const {product} = this.props
     return (
@@ -48,7 +50,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const SingleProductDetail = connect(mapStateToProps, mapDispatchToProps)(
-  SingleProduct
-)
-export default SingleProductDetail
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)

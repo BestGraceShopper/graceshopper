@@ -5,19 +5,15 @@ const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 const ADD_TO_CART = 'ADD_TO_CART'
 // const SET_QUANTITY = 'SET_QUANTITY'
 
-// action creators
 const getProducts = products => ({type: GET_PRODUCTS, products})
 const getSingleProduct = product => ({type: GET_SINGLE_PRODUCT, product})
 const addCart = product => ({type: ADD_TO_CART, product})
 // const setQuantity = (productId, quantity) => ({type: SET_QUANTITY, productId, quantity})
 
-const initialState = {products: [], singleProduct: {}, cart: []}
-
-// thunks
 export const getAllProducts = () => async dispatch => {
   try {
-    const res = await axios.get('/api/products')
-    dispatch(getProducts(res.data || initialState.products))
+    const {data} = await axios.get('/api/products')
+    dispatch(getProducts(data || initialState.products))
   } catch (error) {
     console.error(error)
   }
@@ -25,8 +21,8 @@ export const getAllProducts = () => async dispatch => {
 
 export const getProduct = id => async dispatch => {
   try {
-    const res = await axios.get(`/api/products/${id}`)
-    dispatch(getSingleProduct(res.data || 'product not found'))
+    const {data} = await axios.get(`/api/products/${id}`)
+    dispatch(getSingleProduct(data || 'product not found'))
   } catch (error) {
     console.error(error)
   }
@@ -39,7 +35,9 @@ export const addToCart = product => dispatch => {
     console.error(error)
   }
 }
-// the reducer
+
+const initialState = {products: [], singleProduct: {}, cart: []}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:

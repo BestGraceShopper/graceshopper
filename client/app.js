@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {Menu, Segment} from 'semantic-ui-react'
-import Routes from './routes'
 import {Link} from 'react-router-dom'
+import {Menu, Segment} from 'semantic-ui-react'
+
+import Routes from './routes'
 
 export default class App extends Component {
   state = {activeItem: 'home'}
