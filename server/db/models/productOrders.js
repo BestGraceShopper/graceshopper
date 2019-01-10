@@ -5,24 +5,13 @@ const db = require('../db')
 const ProductOrders = db.define('productOrder', {
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    validate: {
+      notEmpty: true
+    }
   },
   comments: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   }
 })
 
 module.exports = ProductOrders
-
-
-// productOrders has many orders
-// pruductORders has many products
-
-
-
-
-
-// order#     product#      quantity
-  // 1           6          1
-  // 1            2         2
-  // 2          6           3

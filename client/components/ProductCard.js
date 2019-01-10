@@ -1,6 +1,6 @@
 import React from 'react'
-import {Card, Icon, Image, Button} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
+import {Card, Icon, Image, Button} from 'semantic-ui-react'
 
 const ProductCard = props => (
   <Card>
@@ -16,7 +16,11 @@ const ProductCard = props => (
         <Button as={Link} to={`/products/${props.product.id}`}>
           <Button.Content visible>View Product</Button.Content>
         </Button>
-        <Button  onClick={() => props.addToCart(props.product)} primary animated="vertical">
+        <Button
+          onClick={() => props.addToCart(props.product)}
+          primary
+          animated="vertical"
+        >
           <Button.Content hidden>Add to Cart</Button.Content>
           <Button.Content visible>
             <Icon name="shop" />
