@@ -13,16 +13,10 @@ const User = db.define('user', {
     }
   },
   firstName: {
-    type: Sequelize.STRING,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   lastName: {
-    type: Sequelize.STRING,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   // maybe create new model for adresses only, test with postman
   // string == address object
