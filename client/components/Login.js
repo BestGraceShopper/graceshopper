@@ -1,15 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Button, Checkbox, Form} from 'semantic-ui-react'
+import {withRouter, Route, Switch} from 'react-router-dom'
+import {Button, Message, Form} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
 import {auth} from '../store'
 
 const Login = props => {
   const {name, displayName, handleSubmit, error} = props
+
   return (
     <div>
-      <Form onSubmit={handleSubmit} name={name}>
+      <Form error onSubmit={handleSubmit} name={name}>
         <Form.Field>
           <label>Email</label>
           <input name="email" placeholder="Email" />
@@ -19,7 +21,17 @@ const Login = props => {
           <input name="password" placeholder="Password" />
         </Form.Field>
         <Button type="submit">{displayName}</Button>
+        <Message attached="bottom" warning>
+          {/* <Icon name="help" /> */}
+          Already signed up?&nbsp;<a href="/login">Login here</a>&nbsp;instead.
+        </Message>
+        <Message error>
+          <Message.Header>Invalid Email or Password!</Message.Header>
+        </Message>
       </Form>
+      {/* <Message attached="bottom" warning>
+        <Route>Already signed Up? LoginHere</Route>
+      </Message> */}
     </div>
   )
 }
@@ -52,9 +64,8 @@ const mapDispatchToState = dispatch => {
   }
 }
 
-// export default connect(mapLoginToState, mapDispatchToState)(Login)
 export const LoginForm = connect(mapLoginToState, mapDispatchToState)(Login)
-// export const Signup = connect(mapSignupToState, mapDispatchToState)(AuthForm)
+export const SignupForm = connect(mapSignupToState, mapDispatchToState)(Login)
 
 /**
  * PROP TYPES

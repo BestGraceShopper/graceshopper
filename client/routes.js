@@ -7,7 +7,7 @@ import {me} from './store'
 import Cart from './components/Cart'
 import SingleProduct from './components/SingleProduct'
 import ProductList from './components/ProductList'
-import Login, {LoginForm} from './components/Login'
+import {LoginForm, SignupForm} from './components/Login'
 
 class Routes extends Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={LoginForm} />
-        {/* <Route path="/signup" component={Signup} /> */}
+        <Route path="/signup" component={SignupForm} />
         {/* {isLoggedIn && ( */}
         {/* <Switch> */}
         {/* Routes placed here are only available after logging in */}
