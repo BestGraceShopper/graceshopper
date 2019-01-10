@@ -17,20 +17,13 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    // need to find and add default product image
-    defaultValue: 'default image'
+    defaultValue: '/images/product-image-placeholder.jpg'
   },
   price: {
-    // change price into pennies
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
     validate: {
-      min: 0.01
+      min: 1
     }
-  },
-  tags: {
-    // tags ARR not good practice
-    type: Sequelize.ARRAY(Sequelize.TEXT),
-    defaultValue: []
   },
   inventory: {
     type: Sequelize.INTEGER,
@@ -38,10 +31,6 @@ const Product = db.define('product', {
       min: 0
     }
   }
-  // rating: {
-  //   type: Sequelize.FLOAT,
-  //   defaultValue: 3.5
-  // }
 })
 
 module.exports = Product

@@ -5,12 +5,22 @@ const User = require('../server/db/models/user')
 const Product = require('../server/db/models/product')
 
 async function seed() {
-  await db.sync({force: true})
+  await db.sync({ force: true })
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({
+      email: 'cody@email.com',
+      firstName: 'Cody',
+      lastName: 'Code',
+      password: '123'
+    }),
+    User.create({
+      email: 'murphy@email.com',
+      firstName: 'Murphy',
+      lastName: 'Murph',
+      password: '123'
+    })
   ])
 
   const products = await Promise.all([
@@ -19,16 +29,14 @@ async function seed() {
       description: "It's a sock. For your baby. Note: Only includes one sock.",
       imageUrl:
         'https://assets.marthastewart.com/styles/wmax-570/d15/blue-baby-socks/blue-baby-socks_0_sq.jpg?itok=4TgWrMi3',
-      price: 3.0,
-      tags: ['baby', 'sock', 'blue'],
+      price: 30,
       inventory: 20
     }),
     Product.create({
       name: 'Diaper Loading Onesie',
       description: 'Full diaper imminent.',
       imageUrl: 'https://i.ebayimg.com/images/g/pwIAAOSwx2dYGWq0/s-l300.jpg',
-      price: 19.99,
-      tags: ['diaper', 'loading', 'onesie', 'blue'],
+      price: 199,
       inventory: 15
     })
     // Product.create({
@@ -40,11 +48,9 @@ async function seed() {
     //   inventory: 15
     // })
   ])
-  console.log(users)
-  console.log(products)
-  console.log(`seeded ${users.length} users`)
 
-  console.log(`seeded ${products.length} users`)
+  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
