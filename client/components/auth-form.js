@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
 import {auth} from '../store'
 
 /**
@@ -60,6 +59,7 @@ const mapSignup = state => {
 const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
+      console.log(evt.target.name)
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
