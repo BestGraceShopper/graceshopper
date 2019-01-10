@@ -1,7 +1,8 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
+const User = require('../server/db/models/user')
+const Product = require('../server/db/models/product')
 
 async function seed() {
   await db.sync({force: true})
@@ -29,7 +30,7 @@ async function seed() {
       price: 19.99,
       tags: ['diaper', 'loading', 'onesie', 'blue'],
       inventory: 15
-    }),
+    })
     // Product.create({
     //   name: '',
     //   description: '',
@@ -39,7 +40,8 @@ async function seed() {
     //   inventory: 15
     // })
   ])
-
+  console.log(users)
+  console.log(products)
   console.log(`seeded ${users.length} users`)
 
   console.log(`seeded ${products.length} users`)
