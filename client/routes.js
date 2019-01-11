@@ -1,13 +1,14 @@
-import React, {Component} from 'react'
-import {withRouter, Route, Switch} from 'react-router-dom'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { withRouter, Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import {me} from './store'
+import { me } from './store'
 
 import Cart from './components/Cart'
 import SingleProduct from './components/SingleProduct'
 import ProductList from './components/ProductList'
+import { LoginForm, SignupForm } from './components/Login'
 
 class Routes extends Component {
   componentDidMount() {
@@ -15,13 +16,13 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const { isLoggedIn } = this.props
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        {/* <Route path="/login" component={Login} /> */}
-        {/* <Route path="/signup" component={Signup} /> */}
+        <Route path="/login" component={LoginForm} />
+        <Route path="/signup" component={SignupForm} />
         {/* {isLoggedIn && ( */}
         {/* <Switch> */}
         {/* Routes placed here are only available after logging in */}
