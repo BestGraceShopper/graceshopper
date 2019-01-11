@@ -1,31 +1,74 @@
 import axios from 'axios'
 import history from '../../history'
+import { runInNewContext } from 'vm'
 
-const GET_USER = 'GET_USER'
+// const GET_USER = 'GET_USER'
+export const AUTH_REQUEST = 'AUTH_REQUEST'
+export const AUTH_SUCCESS = 'AUTH_SUCCESS'
+export const AUTH_FAILURE = 'AUTH_FAILURE'
+
 const REMOVE_USER = 'REMOVE_USER'
 
-const getUser = user => ({ type: GET_USER, user })
+// const getUser = user => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 
-export const me = () => async dispatch => {
-  try {
-    const { data } = await axios.get('/auth/me')
-    dispatch(getUser(data || defaultUser))
-  } catch (err) {
-    console.error(err)
+const authenticating = () => ({
+  type: AUTH_REQUEST
+})
+
+const authenticate = userData => ({
+  type: AUTH_SUCCESS,
+  user: userData,
+  login: false
+})
+
+const authError = error => ({
+  type: AUTH_FAILURE,
+  error: 'Failed to authenticate',
+  payload: error
+})
+
+export const me = () => {
+  return async dispatch => {
+    dispatch(authenticating())
+    try {
+      const { data } = await axios.get('/auth/me')
+      if (data.email) {
+        dispatch(authenticate(data))
+      }
+    } catch (error) {
+      dispatch(authError(error))
+    }
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+// export const me = () => async dispatch => {
+//   try {
+//     const { data } = await axios.get('/auth/me')
+//     console.log(data, 'userdatea')
+//     if (data.email) {
+//       dispatch(getUser(data))
+//     }
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
+export const selectUserName = state => {
+  const user = state.auth.user
+  const title = user.gender === 'Male' ? 'Mr.' : 'Ms.'
+  return `${title} ${user.firstName} ${user.lastName}`
+}
+
+export const author = (email, password, method) => async dispatch => {
   let res
   try {
     res = await axios.post(`/auth/${method}`, { email, password })
   } catch (authError) {
-    return dispatch(getUser({ error: authError }))
+    return dispatch(dispatch(authError(error)))
   }
 
   try {
-    dispatch(getUser(res.data))
+    dispatch(authenticate(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -42,12 +85,19 @@ export const logout = () => async dispatch => {
   }
 }
 
-const initialState = { user: {}, status: 'Logged Out' }
+const initialState = {
+  user: {
+    email: ''
+  },
+  login: true
+}
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_USER:
-      return { user: action.user, status: 'Logged In' }
+    case AUTH_REQUEST:
+      return { ...state, isFetching: true }
+    case AUTH_SUCCESS:
+      return { user: action.user, login: action.login, isFetching: false }
     case REMOVE_USER:
       return initialState
     default:

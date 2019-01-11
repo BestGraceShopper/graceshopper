@@ -1,9 +1,9 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 export const UserHome = props => {
-  const {email} = props
+  const { email } = props
 
   return (
     <div>

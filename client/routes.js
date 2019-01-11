@@ -1,13 +1,15 @@
-import React, {Component} from 'react'
-import {withRouter, Route, Switch} from 'react-router-dom'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { withRouter, Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {me} from './store'
+
+import { me } from './store'
 
 import Cart from './components/Cart'
 import SingleProduct from './components/SingleProduct'
 import ProductList from './components/ProductList'
-import {LoginForm, SignupForm} from './components/Login'
+import { LoginForm, SignupForm } from './components/Login'
+import userHome from './components/UserHome'
 
 class Routes extends Component {
   componentDidMount() {
@@ -15,7 +17,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const { isLoggedIn } = this.props
 
     return (
       <Switch>
@@ -28,6 +30,7 @@ class Routes extends Component {
         <Route exact path="/products" component={ProductList} />
         <Route path="/cart" component={Cart} />
         <Route path="/products/:id" component={SingleProduct} />
+        <Route path="/userhome" component={userHome} />
         {/* </Switch> */}
         )}
         {/* Displays our Login component as a fallback */}
