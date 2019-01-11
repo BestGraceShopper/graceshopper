@@ -1,13 +1,13 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
-import {Button, Message, Form} from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { withRouter, Route, Switch } from 'react-router-dom'
+import { Button, Message, Form } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
-import {auth} from '../store'
+import { auth } from '../store'
 
 const Login = props => {
-  const {name, displayName, handleSubmit, error} = props
+  const { name, displayName, handleSubmit, status, error } = props
 
   return (
     <div>
@@ -40,6 +40,7 @@ const mapLoginToState = state => {
   return {
     name: 'login',
     displayName: 'Login',
+    status: state.user.status,
     error: state.user.error
   }
 }

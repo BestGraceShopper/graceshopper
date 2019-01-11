@@ -1,16 +1,17 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {Menu, Segment, Container} from 'semantic-ui-react'
-
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { Menu, Segment } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 import Routes from './routes'
 
-export default class App extends Component {
-  state = {activeItem: 'home'}
+class App extends Component {
+  state = { activeItem: 'home' }
 
-  handleItemClick = (e, {name}) => this.setState({activeItem: name})
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
-    const {activeItem} = this.state
+    console.log(this.props)
+    const { activeItem } = this.state
 
     return (
       <div>
@@ -31,23 +32,27 @@ export default class App extends Component {
             active={activeItem === 'products'}
             onClick={this.handleItemClick}
           />
+
           <Menu.Menu position="right">
-            <Menu.Item
-              as={Link}
-              to="/login"
-              name="Log In"
-              icon="user outline"
-              active={activeItem === 'user'}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              as={Link}
-              to="/home"
-              name="User Profile"
-              icon="user"
-              active={activeItem === 'user'}
-              onClick={this.handleItemClick}
-            />
+            {this.props.status === 'Logged Out' ? (
+              <Menu.Item
+                as={Link}
+                to="/login"
+                name="Log In"
+                icon="user outline"
+                active={activeItem === 'user'}
+                onClick={this.handleItemClick}
+              />
+            ) : (
+              <Menu.Item
+                as={Link}
+                to="/home"
+                name="User Profile"
+                icon="user"
+                active={activeItem === 'user'}
+                onClick={this.handleItemClick}
+              />
+            )}
             <Menu.Item
               as={Link}
               to="/cart"
@@ -65,3 +70,11 @@ export default class App extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    status: state.user.status
+  }
+}
+
+export default connect(mapStateToProps)(App)
