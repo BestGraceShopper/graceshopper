@@ -4,9 +4,10 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import { Button, Message, Form } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
-import { auth } from '../store'
+import { author } from '../store'
 
 const Login = props => {
+  console.log(props, 'LOGIN PROPS')
   const { name, displayName, handleSubmit, status, error } = props
 
   return (
@@ -25,9 +26,9 @@ const Login = props => {
           {/* <Icon name="help" /> */}
           Already signed up?&nbsp;<a href="/login">Login here</a>&nbsp;instead.
         </Message>
-        <Message error>
+        {/* <Message error>
           <Message.Header>Invalid Email or Password!</Message.Header>
-        </Message>
+        </Message> */}
       </Form>
       {/* <Message attached="bottom" warning>
         <Route>Already signed Up? LoginHere</Route>
@@ -56,11 +57,12 @@ const mapSignupToState = state => {
 const mapDispatchToState = dispatch => {
   return {
     handleSubmit(evt) {
+      console.log(evt.target, 'HSEVT')
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      dispatch(author(email, password, formName))
     }
   }
 }
