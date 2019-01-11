@@ -4,12 +4,12 @@ import history from '../../history'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
-const getUser = user => ({type: GET_USER, user})
-const removeUser = () => ({type: REMOVE_USER})
+const getUser = user => ({ type: GET_USER, user })
+const removeUser = () => ({ type: REMOVE_USER })
 
 export const me = () => async dispatch => {
   try {
-    const {data} = await axios.get('/auth/me')
+    const { data } = await axios.get('/auth/me')
     dispatch(getUser(data || defaultUser))
   } catch (err) {
     console.error(err)
@@ -19,9 +19,9 @@ export const me = () => async dispatch => {
 export const auth = (email, password, method) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post(`/auth/${method}`, { email, password })
   } catch (authError) {
-    return dispatch(getUser({error: authError}))
+    return dispatch(getUser({ error: authError }))
   }
 
   try {
@@ -42,14 +42,14 @@ export const logout = () => async dispatch => {
   }
 }
 
-const defaultUser = {}
+const initialState = { user: {}, status: 'Logged Out' }
 
-export default function(state = defaultUser, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return { user: action.user, status: 'Logged In' }
     case REMOVE_USER:
-      return defaultUser
+      return initialState
     default:
       return state
   }
