@@ -1,17 +1,31 @@
 import React from 'react'
-import { Item } from 'semantic-ui-react'
+import { Item, Button, Divider } from 'semantic-ui-react'
 import CartItem from './CartItem'
 import { connect } from 'react-redux'
 import { getProduct } from '../store/reducers/product'
+import { Link } from 'react-router-dom'
 
 class Cart extends React.Component {
   render() {
     const { cart } = this.props
     return (
       <div>
-        <Item.Group>
-          {cart.map((item, idx) => <CartItem product={item} key={idx} />)}
-        </Item.Group>
+        <div>
+          <Item.Group>
+            {cart.map((item, idx) => <CartItem product={item} key={idx} />)}
+          </Item.Group>
+        </div>
+        <Divider />
+        <div>
+          <Button
+            as={Link}
+            to="/checkout"
+            name="checkout"
+            onClick={this.handleItemClick}
+          >
+            Checkout
+          </Button>
+        </div>
       </div>
     )
   }

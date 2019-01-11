@@ -1,5 +1,5 @@
 import React from 'react'
-import {Item, Dropdown, Menu} from 'semantic-ui-react'
+import { Item, Dropdown, Menu, Button } from 'semantic-ui-react'
 
 const CartItem = props => (
   <Item>
@@ -11,7 +11,7 @@ const CartItem = props => (
         <span>{props.product.description}</span>
       </Item.Description>
       <Item.Extra>
-        <a href="">Remove from Cart</a>
+        <Button>Remove from Cart</Button>
         <Menu compact floated="right">
           <Dropdown
             labeled={true}
@@ -29,7 +29,7 @@ const CartItem = props => (
 const options = () => {
   let arr = []
   for (let i = 1; i <= 10; i++) {
-    arr.push({key: i, text: i, value: i})
+    arr.push({ key: i, text: i, value: i })
   }
   return arr
 }
