@@ -6,23 +6,29 @@ router.put('/user/:id/:method', async (req, res, next) => {
   try {
     let { method, id } = req.params
     const cart = req.body
+    let ordered
+
     if (id === 'guest') id = null
+
     if (method === 'savecart') {
-      //save cart
+      ordered = false
     } else if (method === 'purchase') {
-      const order = await UserOrder.create({
-        ordered: true,
-        totalPrice: 1,
-        userId: id
-      })
-      cart.map(product => {
-        UserOrdersProduct.create({
-          quantity: 1,
-          orderId: order.id,
-          productId: product.id
-        })
-      })
+      ordered = true
     }
+
+    const order = await UserOrder.create({
+      ordered: ordered,
+      totalPrice: 1,
+      userId: id
+    })
+
+    cart.map(async product => {
+      let orderItem = await UserOrdersProduct.create({
+        quantity: 1,
+        orderId: order.id,
+        productId: product.id
+      })
+    })
 
     res.status(200).json('success!')
   } catch (err) {
