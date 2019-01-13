@@ -9,7 +9,8 @@ import {
   List,
   Button,
   Grid,
-  GridColumn
+  GridColumn,
+  Table
 } from 'semantic-ui-react'
 
 export const UserHome = props => {
@@ -23,14 +24,47 @@ export const UserHome = props => {
   }
 
   const orders = [
-    { orderId: 1, orderDate: 'jan5', orderPrice: '$5.99' },
-    { orderId: 2, orderDate: 'jan6', orderPrice: '$99.99' },
-    { orderId: 3, orderDate: 'jan7', orderPrice: '$250.99' }
+    {
+      orderId: 1,
+      orderDate: 'January 5th, 2019',
+      orderPrice: '$74.99',
+      orderStatus: 'Completed'
+    },
+    {
+      orderId: 2,
+      orderDate: 'January 6th, 2019',
+      orderPrice: '$99.99',
+      orderStatus: 'Completed'
+    },
+    {
+      orderId: 3,
+      orderDate: 'January 10th, 2019',
+      orderPrice: '$250.00',
+      orderStatus: 'Shipped'
+    },
+    {
+      orderId: 4,
+      orderDate: 'January 15th, 2019',
+      orderPrice: '$47.99',
+      orderStatus: 'Future'
+    },
+    {
+      orderId: 5,
+      orderDate: 'January 3rd, 2019',
+      orderPrice: '$19.99',
+      orderStatus: 'Shipped'
+    },
+    {
+      orderId: 6,
+      orderDate: 'January 11th, 2019',
+      orderPrice: '$25.89',
+      orderStatus: 'Pending'
+    }
   ]
   return (
     <div>
       <Header as="h2">Welcome, {user.firstName}</Header>
-      <Divider hidden />
+      <Divider fitted />
       <React.Fragment>
         <Divider horizontal>
           <Header as="h4">
@@ -71,7 +105,8 @@ export const UserHome = props => {
         </Button>
       </Container>
 
-      <Divider hidden section />
+      <Divider fitted section />
+
       <React.Fragment>
         <Divider horizontal>
           <Header as="h4">
@@ -81,26 +116,36 @@ export const UserHome = props => {
         </Divider>
       </React.Fragment>
       <Container>
-        <Header as="h6" icon>
-          <Icon name="th list" />
-          Order History
-        </Header>
-
-        <List divided verticalAlign="middle">
-          {orders.map(order => {
-            return (
-              <List.Item key={order.orderId}>
-                <List.Content>
-                  <Button>Show</Button>
-                </List.Content>
-                <List.Content>Order Date{order.orderDate}</List.Content>
-                <List.Content>Total Price: {order.orderPrice}</List.Content>
-                <List.Content>Order ID: {order.orderId}</List.Content>
-              </List.Item>
-            )
-          })}
-        </List>
+        <Table singleLine selectable striped>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Order ID</Table.HeaderCell>
+              <Table.HeaderCell>Order Date</Table.HeaderCell>
+              <Table.HeaderCell>Total Price</Table.HeaderCell>
+              <Table.HeaderCell>Order Status</Table.HeaderCell>
+              <Table.HeaderCell>Order Details</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {orders.map(order => {
+              return (
+                <Table.Row key={order.orderId}>
+                  <Table.Cell>{order.orderId}</Table.Cell>
+                  <Table.Cell>{order.orderDate}</Table.Cell>
+                  <Table.Cell>{order.orderPrice}</Table.Cell>
+                  <Table.Cell>{order.orderStatus}</Table.Cell>
+                  <Table.Cell>
+                    <React.Fragment>
+                      <Button>View Details</Button>
+                    </React.Fragment>
+                  </Table.Cell>
+                </Table.Row>
+              )
+            })}
+          </Table.Body>
+        </Table>
       </Container>
+      <Divider section hidden />
     </div>
   )
 }
