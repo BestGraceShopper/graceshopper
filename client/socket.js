@@ -6,4 +6,8 @@ socket.on('connect', () => {
   console.log('Connected!')
 })
 
+socket.on('disconnect', () => {
+  console.log('disconnected') //used to store cart data
+})
+
 export default socket
