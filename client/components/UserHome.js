@@ -7,7 +7,9 @@ import {
   Container,
   Divider,
   List,
-  Button
+  Button,
+  Grid,
+  GridColumn
 } from 'semantic-ui-react'
 
 export const UserHome = props => {
@@ -27,55 +29,77 @@ export const UserHome = props => {
   ]
   return (
     <div>
-      <Header as="h1">Welcome, Username Here</Header>
-      <Divider />
-      <Container>
-        <Header as="h4" icon>
-          <Icon name="settings" />
-          Account Information
-          <Header.Subheader>
-            <List divided verticalAlign="middle">
-              <List.Item floated="left">
-                <List.Content>Address: {user.address}</List.Content>
-                <List.Content>Email: {user.email}</List.Content>
-                <List.Content>Last Name: {user.lastName}</List.Content>
-                <List.Content>First Name: {user.firstName}</List.Content>
-              </List.Item>
-              <List.Content>
-                <Button>Edit</Button>
-              </List.Content>
-            </List>{' '}
-          </Header.Subheader>
-        </Header>
+      <Header as="h2">Welcome, {user.firstName}</Header>
+      <Divider hidden />
+      <React.Fragment>
+        <Divider horizontal>
+          <Header as="h4">
+            <Icon name="settings" />
+            Account Information
+          </Header>
+        </Divider>
+      </React.Fragment>
+      <Container floated="center">
+        <Grid celled padded relaxed attached>
+          <Grid.Row>
+            <Grid.Column width={3} textAlign="right">
+              First Name:
+            </Grid.Column>
+            <Grid.Column textAlign="left">{user.firstName}</Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={3} textAlign="right">
+              Last Name:
+            </Grid.Column>
+            <Grid.Column textAlign="left">{user.lastName}</Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={3} textAlign="right">
+              Email:
+            </Grid.Column>
+            <Grid.Column textAlign="left">{user.email}</Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={3} textAlign="right">
+              Address:
+            </Grid.Column>
+            <Grid.Column textAlign="left">{user.address}</Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <Button size="mini" floated="right" compact>
+          Edit
+        </Button>
       </Container>
-      <Divider />
+
+      <Divider hidden section />
+      <React.Fragment>
+        <Divider horizontal>
+          <Header as="h4">
+            <Icon name="th list" />
+            Order History
+          </Header>
+        </Divider>
+      </React.Fragment>
       <Container>
-        <Header as="h4" icon>
+        <Header as="h6" icon>
           <Icon name="th list" />
           Order History
-          <Header.Subheader>
-            <List divided verticalAlign="middle">
-              {orders.map(order => {
-                return (
-                  <List.Item>
-                    <List.Content floated="right">
-                      <Button>Show</Button>
-                    </List.Content>
-                    <List.Content floated="right">
-                      Order Date{order.orderDate}
-                    </List.Content>
-                    <List.Content floated="right">
-                      Total Price: {order.orderPrice}
-                    </List.Content>
-                    <List.Content floated="right">
-                      Order ID: {order.orderId}
-                    </List.Content>
-                  </List.Item>
-                )
-              })}
-            </List>
-          </Header.Subheader>
         </Header>
+
+        <List divided verticalAlign="middle">
+          {orders.map(order => {
+            return (
+              <List.Item key={order.orderId}>
+                <List.Content>
+                  <Button>Show</Button>
+                </List.Content>
+                <List.Content>Order Date{order.orderDate}</List.Content>
+                <List.Content>Total Price: {order.orderPrice}</List.Content>
+                <List.Content>Order ID: {order.orderId}</List.Content>
+              </List.Item>
+            )
+          })}
+        </List>
       </Container>
     </div>
   )
