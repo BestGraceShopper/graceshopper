@@ -25,7 +25,7 @@ export default class CartItem extends React.Component {
       return arr
     }
 
-    const { product } = this.props
+    const { product, removeFromCart } = this.props
 
     return (
       <Item>
@@ -37,7 +37,9 @@ export default class CartItem extends React.Component {
             <span>{product.description}</span>
           </Item.Description>
           <Item.Extra>
-            <Button>Remove from Cart</Button>
+            <Button onClick={() => removeFromCart(product.id)}>
+              Remove from Cart
+            </Button>
             <Menu compact floated="right">
               <Dropdown
                 labeled={true}
