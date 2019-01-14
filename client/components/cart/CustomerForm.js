@@ -32,11 +32,13 @@ class FormSuccess extends Component {
       <Form success>
         <Form.Input
           label="First Name"
-          placeholder={isLoggedIn ? user.firstName : 'first name'}
+          placeholder={
+            isLoggedIn ? user.firstName || 'first name' : 'first name'
+          }
         />
         <Form.Input
           label="Last Name"
-          placeholder={isLoggedIn ? user.lastName : 'last name'}
+          placeholder={isLoggedIn ? user.lastName || 'last name' : 'last name'}
         />
         <Form.Input
           label="Address"
@@ -46,7 +48,7 @@ class FormSuccess extends Component {
         />
         {this.state.complete ? (
           <Message
-            success={this.state.complete} // <-- is this redundant?
+            success={this.state.complete}
             header="All Set!"
             content="Your order is on the way.  Check your email for shipping details"
           />
@@ -63,7 +65,7 @@ const mapStateToProps = state => {
     isLoggedIn: !!state.user.user.id,
     user: state.user.user,
     products: state.product.products,
-    cart: state.product.cart,
+    cart: state.cart.cart,
     orderSummary: state.product.orderSummary
   }
 }
