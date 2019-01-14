@@ -43,6 +43,7 @@ export const me = () => {
   }
 }
 
+//CG: Delete unused code 
 // export const me = () => async dispatch => {
 //   try {
 //     const { data } = await axios.get('/auth/me')

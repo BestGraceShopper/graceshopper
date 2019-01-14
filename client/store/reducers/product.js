@@ -41,11 +41,16 @@ export const getProduct = id => async dispatch => {
 
 export const addToCart = product => dispatch => {
   try {
+    //When you make this thunk built out. You'll have alternative logic here for logged-in / non logged-in users.
     dispatch(addCart(product))
   } catch (error) {
     console.error(error)
   }
 }
+
+// /api/users/:id/orders POST (PUT)
+// /api/users/:id/cart GET
+// /api/users/:id/cart PUT
 
 export const purchaseOrder = (userId, cart) => async dispatch => {
   try {
