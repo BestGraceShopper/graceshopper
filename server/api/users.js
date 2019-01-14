@@ -39,8 +39,7 @@ router.get('/:id', async (req, res, next) => {
 router.put('/:id/cart', async (req, res, next) => {
   try {
     let { id } = req.params
-    const { cart } = req.body
-
+    const cart = req.body
     if (id === 'guest') id = null
 
     const order = await UserOrder.create({
@@ -56,6 +55,7 @@ router.put('/:id/cart', async (req, res, next) => {
           orderId: order.id,
           productId: product.id
         })
+        return orderItem
       })
     )
 

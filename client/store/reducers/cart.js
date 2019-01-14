@@ -23,7 +23,7 @@ export const addToCart = product => dispatch => {
 
 export const purchaseOrder = (userId, cart) => async dispatch => {
   try {
-    const { data } = await axios.put(`/api/user/${userId}/cart`, cart)
+    const { data } = await axios.put(`/api/users/${userId}/cart`, cart)
     dispatch(purchaseCart(data))
   } catch (error) {
     console.error(error)
