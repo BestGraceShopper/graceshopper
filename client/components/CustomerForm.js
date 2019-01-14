@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Button, Form, Message } from 'semantic-ui-react'
-
-export default class FormSuccess extends Component {
+import { purchaseOrder } from '../store/reducers/product'
+class FormSuccess extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstName: '',
-      lastName: '',
-      address: '',
       complete: false
     }
     this.successCallback = this.successCallback.bind(this)
@@ -22,25 +20,28 @@ export default class FormSuccess extends Component {
 
   handlePurchaseClick() {
     this.successCallback()
+    this.props.isLoggedIn
+      ? this.props.makePurchaseOrder(this.props.user.id, this.props.cart)
+      : this.props.makePurchaseOrder('guest', this.props.cart)
     // then action to actually make the purchase using Stripe
   }
 
   render() {
-    const { user } = this.props
+    const { isLoggedIn, user } = this.props
     return (
       <Form success>
         <Form.Input
           label="First Name"
-          placeholder={user ? user.user.firstName : 'first name'}
+          placeholder={isLoggedIn ? user.firstName : 'first name'}
         />
         <Form.Input
           label="Last Name"
-          placeholder={user ? user.user.lastName : 'last name'}
+          placeholder={isLoggedIn ? user.lastName : 'last name'}
         />
         <Form.Input
           label="Address"
           placeholder={
-            user ? user.user.address || '1234 Main street' : '1234 Main street'
+            isLoggedIn ? user.address || '1234 Main street' : '1234 Main street'
           }
         />
         {this.state.complete ? (
@@ -56,3 +57,21 @@ export default class FormSuccess extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: !!state.user.user.id,
+    user: state.user.user,
+    products: state.product.products,
+    cart: state.product.cart,
+    orderSummary: state.product.orderSummary
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    makePurchaseOrder: (id, cart) => dispatch(purchaseOrder(id, cart))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormSuccess)

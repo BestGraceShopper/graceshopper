@@ -19,7 +19,7 @@ const authenticating = () => ({
 const authenticate = userData => ({
   type: AUTH_SUCCESS,
   user: userData,
-  login: false
+  login: true
 })
 
 const authError = error => ({
@@ -89,7 +89,7 @@ const initialState = {
   user: {
     email: ''
   },
-  login: true
+  login: false
 }
 
 export default function(state = initialState, action) {
