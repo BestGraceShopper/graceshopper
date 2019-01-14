@@ -4,7 +4,7 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import { Button, Message, Form } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
-import { author } from '../store'
+import { author } from '../../store'
 
 const Login = props => {
   console.log(props, 'LOGIN PROPS')

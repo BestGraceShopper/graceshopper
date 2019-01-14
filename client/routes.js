@@ -5,12 +5,12 @@ import PropTypes from 'prop-types'
 
 import { me } from './store'
 
-import Cart from './components/Cart'
-import SingleProduct from './components/SingleProduct'
-import ProductList from './components/ProductList'
-import { LoginForm, SignupForm } from './components/Login'
-import userHome from './components/UserHome'
-import Checkout from './components/Checkout'
+import Cart from './components/cart/Cart'
+import SingleProduct from './components/product/SingleProduct'
+import ProductList from './components/product/ProductList'
+import { LoginForm, SignupForm } from './components/user/Login'
+import userHome from './components/user/UserHome'
+import Checkout from './components/cart/Checkout'
 
 class Routes extends Component {
   componentDidMount() {
@@ -18,16 +18,6 @@ class Routes extends Component {
   }
 
   render() {
-    const {
-      isLoggedIn,
-      user,
-      products,
-      singleProduct,
-      cart,
-      orderSummary,
-      productState
-    } = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}

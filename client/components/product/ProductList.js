@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Grid } from 'semantic-ui-react'
 
 import ProductCard from './ProductCard'
-import { getAllProducts, addToCart } from '../store/reducers/product'
+import { getAllProducts } from '../../store/reducers/product'
+import { addToCart } from '../../store/reducers/cart'
 
 class ProductList extends Component {
   componentDidMount() {

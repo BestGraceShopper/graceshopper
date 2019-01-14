@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Form, Message } from 'semantic-ui-react'
-import { purchaseOrder } from '../store/reducers/product'
+import { purchaseOrder } from '../../store/reducers/cart'
 class FormSuccess extends Component {
   constructor(props) {
     super(props)

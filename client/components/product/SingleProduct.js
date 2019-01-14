@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
-import { getProduct, addToCart } from '../store/reducers/product'
+import { getProduct } from '../../store/reducers/product'
+import { addToCart } from '../../store/reducers/cart'
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -14,7 +15,6 @@ class SingleProduct extends Component {
 
   render() {
     const { product } = this.props
-    console.log(this.props.product.imageUrl)
     return (
       <Card>
         <Image centered height={300} width={300} src={product.imageUrl} />

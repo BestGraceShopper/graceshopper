@@ -2,7 +2,8 @@ import React from 'react'
 import { Item, Button, Divider } from 'semantic-ui-react'
 import CartItem from './CartItem'
 import { connect } from 'react-redux'
-import { getProduct, removeFromCart } from '../store/reducers/product'
+import { getProduct } from '../../store/reducers/product'
+import { removeFromCart } from '../../store/reducers/cart'
 import { Link } from 'react-router-dom'
 
 class Cart extends React.Component {
@@ -47,7 +48,7 @@ class Cart extends React.Component {
 
 const mapState = state => {
   return {
-    cart: state.product.cart,
+    cart: state.cart.cart,
     user: state.user.user
   }
 }
