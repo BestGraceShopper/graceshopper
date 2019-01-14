@@ -7,7 +7,6 @@ import PropTypes from 'prop-types'
 import { author } from '../../store'
 
 const Login = props => {
-  console.log(props, 'LOGIN PROPS')
   const { name, displayName, handleSubmit, status, error } = props
 
   return (
