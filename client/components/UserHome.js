@@ -13,7 +13,6 @@ import {
   Table
 } from 'semantic-ui-react'
 import UserInfo from './UserInfo'
-//import FUNCTIONS from REDUCER
 
 class UserHome extends Component {
   constructor(props) {
@@ -82,7 +81,6 @@ class UserHome extends Component {
   _onSubmit = event => {
     event.preventDefault()
     console.log('onsubmit', this.state)
-    // this.props.addNewCampusProp(this.state)
   }
 
   userInfoEditHandler() {
@@ -96,23 +94,15 @@ class UserHome extends Component {
   }
   userInfoSaveHandler() {
     event.preventDefault()
-    // console.log(this.state.formBool, 'clickHandleB')
     if (this.state.formBool === true) {
       this.setState({ formBool: false })
     } else if (this.state.formBool === false) {
       this.setState({ formBool: true })
     }
-    // console.log(this.state.formBool, 'clickHandleA')
     console.log('onsubmit', this.state)
-    // this.props.addNewCampusProp(this.state)
   }
-  //componentDidMount(){
-  //this.props.fetchAllClass
-  //}
 
   render() {
-    // const {Classes} = this. props
-
     return (
       <div>
         <Header as="h2">Welcome, {this.state.firstName}</Header>
@@ -181,21 +171,5 @@ class UserHome extends Component {
     )
   }
 }
-
-//Connectors
-// const mapStateToProps = state => {
-// return {Classes : state.{1:Class}Reducer.allClasses
-// }
-//const mapDispatchToProps = dispatch => {
-//return{
-//fetchFunction: () => {
-//dispatch(reducerFunction()
-//},
-//}
-//}
-// export default connect(
-// mapStateToProps,
-// mapDispatchToProps
-// )(Class)
 
 export default UserHome

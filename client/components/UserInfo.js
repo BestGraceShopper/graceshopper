@@ -12,13 +12,9 @@ import {
   Table,
   Form,
   Input
-} from 'semantic-ui-react' //import FUNCTIONS from REDUCER
+} from 'semantic-ui-react'
 
 class UserInfo extends Component {
-  //componentDidMount(){
-  //this.props.props.fetchAllClass
-  //}
-
   render() {
     console.log(this.props)
     const { user } = this.props
@@ -156,18 +152,5 @@ class UserInfo extends Component {
     )
   }
 }
-
-//Connectors
-//const mapStateToProps = state => {
-//return {Classes : state.{1:Class}Reducer.allClasses
-//}
-//const mapDispatchToProps = dispatch => {
-//return{
-//fetchFunction: () => {
-//dispatch(reducerFunction()
-//},
-//}
-//}
-// export default connect(mapStateToProps, mapDispatchToProps)(Class)
 
 export default UserInfo

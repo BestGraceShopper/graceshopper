@@ -1188,7 +1188,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//import FUNCTIONS from REDUCER
 var UserHome =
 /*#__PURE__*/
 function (_Component) {
@@ -1203,7 +1202,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onSubmit", function (event) {
       event.preventDefault();
-      console.log('onsubmit', _this.state); // this.props.addNewCampusProp(this.state)
+      console.log('onsubmit', _this.state);
     });
 
     _this.state = {
@@ -1279,7 +1278,7 @@ function (_Component) {
   }, {
     key: "userInfoSaveHandler",
     value: function userInfoSaveHandler() {
-      event.preventDefault(); // console.log(this.state.formBool, 'clickHandleB')
+      event.preventDefault();
 
       if (this.state.formBool === true) {
         this.setState({
@@ -1289,18 +1288,13 @@ function (_Component) {
         this.setState({
           formBool: true
         });
-      } // console.log(this.state.formBool, 'clickHandleA')
+      }
 
-
-      console.log('onsubmit', this.state); // this.props.addNewCampusProp(this.state)
-    } //componentDidMount(){
-    //this.props.fetchAllClass
-    //}
-
+      console.log('onsubmit', this.state);
+    }
   }, {
     key: "render",
     value: function render() {
-      // const {Classes} = this. props
       return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Header, {
         as: "h2"
       }, "Welcome, ", this.state.firstName), _react.default.createElement(_semanticUiReact.Divider, {
@@ -1345,22 +1339,7 @@ function (_Component) {
   }]);
 
   return UserHome;
-}(_react.Component); //Connectors
-// const mapStateToProps = state => {
-// return {Classes : state.{1:Class}Reducer.allClasses
-// }
-//const mapDispatchToProps = dispatch => {
-//return{
-//fetchFunction: () => {
-//dispatch(reducerFunction()
-//},
-//}
-//}
-// export default connect(
-// mapStateToProps,
-// mapDispatchToProps
-// )(Class)
-
+}(_react.Component);
 
 var _default = UserHome;
 exports.default = _default;
@@ -1408,7 +1387,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-//import FUNCTIONS from REDUCER
 var UserInfo =
 /*#__PURE__*/
 function (_Component) {
@@ -1422,9 +1400,6 @@ function (_Component) {
 
   _createClass(UserInfo, [{
     key: "render",
-    //componentDidMount(){
-    //this.props.props.fetchAllClass
-    //}
     value: function render() {
       console.log(this.props);
       var user = this.props.user;
@@ -1519,19 +1494,7 @@ function (_Component) {
   }]);
 
   return UserInfo;
-}(_react.Component); //Connectors
-//const mapStateToProps = state => {
-//return {Classes : state.{1:Class}Reducer.allClasses
-//}
-//const mapDispatchToProps = dispatch => {
-//return{
-//fetchFunction: () => {
-//dispatch(reducerFunction()
-//},
-//}
-//}
-// export default connect(mapStateToProps, mapDispatchToProps)(Class)
-
+}(_react.Component);
 
 var _default = UserInfo;
 exports.default = _default;
