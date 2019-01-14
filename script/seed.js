@@ -38,6 +38,24 @@ async function seed() {
       imageUrl: 'https://i.ebayimg.com/images/g/pwIAAOSwx2dYGWq0/s-l300.jpg',
       price: 199,
       inventory: 15
+    }),
+    Product.create({
+      name: 'Baby Duckie Bibs',
+      description: 'Quack Quack for a baby duckling',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/61h%2BvoKhdJL._SL1000_.jpg',
+      price: 10.0,
+      tags: ['Bib', 'duckie', 'yellow'],
+      inventory: 15
+    }),
+    Product.create({
+      name: 'Pair of Pacifiers',
+      description: 'Baby pacifier so you and your child can sleep peacefully',
+      imageUrl:
+        'https://www.todaysparent.com/wp-content/uploads/2017/02/playtex-baby-binky-silicon-pacifier-TPA-1280x960.jpg',
+      price: 5.0,
+      tags: ['Pacifier', 'set', 'of', 'two'],
+      inventory: 15
     })
     // Product.create({
     //   name: '',
