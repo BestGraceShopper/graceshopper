@@ -2,22 +2,13 @@ import React from 'react'
 import { Item, Button, Divider } from 'semantic-ui-react'
 import CartItem from './CartItem'
 import { connect } from 'react-redux'
-import { getProduct } from '../store/reducers/product'
+import { getProduct, removeFromCart } from '../store/reducers/product'
 import { Link } from 'react-router-dom'
 
 class Cart extends React.Component {
-  // the below is an attempt to tally total pricing on the cart
-
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     cartSubtotal: 0
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   this.setState({ cartSubtotal: CartItem.subtotal })
-  // }
+  handleRemoveFromCart(id) {
+    this.props.removeFromCart(id)
+  }
 
   render() {
     const { cart } = this.props
@@ -29,7 +20,7 @@ class Cart extends React.Component {
               <CartItem
                 product={item}
                 key={idx}
-                // subtotal={item.state.subtotal}
+                removeFromCart={this.handleRemoveFromCart.bind(this)}
               />
             ))}
           </Item.Group>
@@ -65,6 +56,9 @@ const mapDispatch = dispatch => {
   return {
     fetchSingleProduct: id => {
       dispatch(getProduct(id))
+    },
+    removeFromCart: id => {
+      dispatch(removeFromCart(id))
     }
   }
 }
