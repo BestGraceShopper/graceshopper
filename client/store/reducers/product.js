@@ -4,12 +4,14 @@ const GET_PRODUCTS = 'GET_PRODUCTS'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 const ADD_TO_CART = 'ADD_TO_CART'
 const PURCHASE = 'PURCHASE'
+const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 // const SET_QUANTITY = 'SET_QUANTITY'
 
 const getProducts = products => ({ type: GET_PRODUCTS, products })
 const getSingleProduct = product => ({ type: GET_SINGLE_PRODUCT, product })
 const addCart = product => ({ type: ADD_TO_CART, product })
 const purchaseCart = orderSummary => ({ type: PURCHASE, orderSummary })
+const removeCart = productId => ({ type: REMOVE_FROM_CART, productId })
 // const setQuantity = (productId, quantity) => ({type: SET_QUANTITY, productId, quantity})
 
 const initialState = {
@@ -54,6 +56,14 @@ export const purchaseOrder = (userId, cart) => async dispatch => {
   }
 }
 
+export const removeFromCart = productId => dispatch => {
+  try {
+    dispatch(removeCart(productId))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
@@ -65,6 +75,11 @@ export default function(state = initialState, action) {
       return { ...state, cart: [...state.cart, action.product] }
     case PURCHASE:
       return { ...state, cart: [], orderSummary: action.orderSummary }
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        cart: state.cart.filter(product => product.id !== action.productId)
+      }
     // case SET_QUANTITY:
     //   products = state.products.map(product => {
     //     if(product.id === action.productId)
