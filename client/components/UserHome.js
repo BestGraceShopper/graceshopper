@@ -71,26 +71,20 @@ class UserHome extends Component {
   }
 
   _onChange(event) {
-    console.log(event.target.value, 'onchangeT')
-    console.log(event.target.name, 'nameT')
-
     this.setState({
       [event.target.name]: event.target.value
     })
   }
   _onSubmit = event => {
     event.preventDefault()
-    console.log('onsubmit', this.state)
   }
 
   userInfoEditHandler() {
-    console.log(this.state.formBool, 'clickHandleB')
     if (this.state.formBool === true) {
       this.setState({ formBool: false })
     } else if (this.state.formBool === false) {
       this.setState({ formBool: true })
     }
-    console.log(this.state.formBool, 'clickHandleA')
   }
   userInfoSaveHandler() {
     event.preventDefault()
@@ -99,7 +93,6 @@ class UserHome extends Component {
     } else if (this.state.formBool === false) {
       this.setState({ formBool: true })
     }
-    console.log('onsubmit', this.state)
   }
 
   render() {

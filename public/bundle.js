@@ -1202,7 +1202,6 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onSubmit", function (event) {
       event.preventDefault();
-      console.log('onsubmit', _this.state);
     });
 
     _this.state = {
@@ -1254,15 +1253,11 @@ function (_Component) {
   _createClass(UserHome, [{
     key: "_onChange",
     value: function _onChange(event) {
-      console.log(event.target.value, 'onchangeT');
-      console.log(event.target.name, 'nameT');
       this.setState(_defineProperty({}, event.target.name, event.target.value));
     }
   }, {
     key: "userInfoEditHandler",
     value: function userInfoEditHandler() {
-      console.log(this.state.formBool, 'clickHandleB');
-
       if (this.state.formBool === true) {
         this.setState({
           formBool: false
@@ -1272,8 +1267,6 @@ function (_Component) {
           formBool: true
         });
       }
-
-      console.log(this.state.formBool, 'clickHandleA');
     }
   }, {
     key: "userInfoSaveHandler",
@@ -1289,8 +1282,6 @@ function (_Component) {
           formBool: true
         });
       }
-
-      console.log('onsubmit', this.state);
     }
   }, {
     key: "render",
@@ -1401,7 +1392,6 @@ function (_Component) {
   _createClass(UserInfo, [{
     key: "render",
     value: function render() {
-      console.log(this.props);
       var user = this.props.user;
       return _react.default.createElement("div", null, this.props.formBool ? _react.default.createElement(_semanticUiReact.Container, null, _react.default.createElement(_semanticUiReact.Grid, {
         padded: true,
