@@ -24,7 +24,7 @@ class Cart extends React.Component {
     return (
       <div>
         <div>
-          <Item.Group>
+          <Item.Group className="cartProducts">
             {cart.map((item, idx) => (
               <CartItem
                 product={item}
