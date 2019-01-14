@@ -1186,6 +1186,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //import FUNCTIONS from REDUCER
 var UserHome =
 /*#__PURE__*/
@@ -1198,15 +1200,19 @@ function (_Component) {
     _classCallCheck(this, UserHome);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UserHome).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onSubmit", function (event) {
+      event.preventDefault();
+      console.log('onsubmit', _this.state); // this.props.addNewCampusProp(this.state)
+    });
+
     _this.state = {
-      user: {
-        firstName: 'John',
-        lastName: 'Adams',
-        address: '123 america lane',
-        email: 'JohnthePRES@america.colony',
-        phone: '212-100-6793'
-      },
-      formBool: false,
+      firstName: 'John',
+      lastName: 'Adams',
+      address: '123 america lane',
+      email: 'JohnthePRES@america.colony',
+      phone: '212-100-6793',
+      formBool: true,
       orders: [{
         orderId: 1,
         orderDate: 'January 5th, 2019',
@@ -1239,12 +1245,21 @@ function (_Component) {
         orderStatus: 'Pending'
       }]
     };
+    _this._onChange = _this._onChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this._onSubmit = _this._onSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.userInfoEditHandler = _this.userInfoEditHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.userInfoSaveHandler = _this.userInfoSaveHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(UserHome, [{
+    key: "_onChange",
+    value: function _onChange(event) {
+      console.log(event.target.value, 'onchangeT');
+      console.log(event.target.name, 'nameT');
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
     key: "userInfoEditHandler",
     value: function userInfoEditHandler() {
       console.log(this.state.formBool, 'clickHandleB');
@@ -1264,7 +1279,7 @@ function (_Component) {
   }, {
     key: "userInfoSaveHandler",
     value: function userInfoSaveHandler() {
-      console.log(this.state.formBool, 'clickHandleB');
+      event.preventDefault(); // console.log(this.state.formBool, 'clickHandleB')
 
       if (this.state.formBool === true) {
         this.setState({
@@ -1274,9 +1289,10 @@ function (_Component) {
         this.setState({
           formBool: true
         });
-      }
+      } // console.log(this.state.formBool, 'clickHandleA')
 
-      console.log(this.state.formBool, 'clickHandleA');
+
+      console.log('onsubmit', this.state); // this.props.addNewCampusProp(this.state)
     } //componentDidMount(){
     //this.props.fetchAllClass
     //}
@@ -1284,10 +1300,10 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      //const {Classes} = this. props
+      // const {Classes} = this. props
       return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Header, {
         as: "h2"
-      }, "Welcome, ", this.state.user.firstName), _react.default.createElement(_semanticUiReact.Divider, {
+      }, "Welcome, ", this.state.firstName), _react.default.createElement(_semanticUiReact.Divider, {
         fitted: true
       }), _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_semanticUiReact.Divider, {
         horizontal: true
@@ -1298,8 +1314,12 @@ function (_Component) {
       }), "Account Information"))), _react.default.createElement(_semanticUiReact.Container, {
         floated: "center"
       }, _react.default.createElement(_UserInfo.default, {
-        form: this.state.formBool,
-        user: this.state.user
+        formBool: this.state.formBool,
+        user: this.state,
+        _onChange: this._onChange,
+        _onSubmit: this._onSubmit,
+        userInfoEditHandler: this.userInfoEditHandler,
+        userInfoSaveHandler: this.userInfoSaveHandler
       })), _react.default.createElement(_semanticUiReact.Divider, {
         fitted: true,
         section: true
@@ -1380,15 +1400,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //import FUNCTIONS from REDUCER
 var UserInfo =
@@ -1396,90 +1414,21 @@ var UserInfo =
 function (_Component) {
   _inherits(UserInfo, _Component);
 
-  function UserInfo(props) {
-    var _this;
-
+  function UserInfo() {
     _classCallCheck(this, UserInfo);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserInfo).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_onSubmit", function (event) {
-      event.preventDefault();
-      console.log('onsubmit', _this.state); // this.props.addNewCampusProp(this.state)
-    });
-
-    _this.state = {
-      user: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        address: '',
-        phone: ''
-      },
-      formBool: true
-    };
-    _this._onChange = _this._onChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this._onSubmit = _this._onSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.userInfoEditHandler = _this.userInfoEditHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.userInfoSaveHandler = _this.userInfoSaveHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(UserInfo).apply(this, arguments));
   }
 
   _createClass(UserInfo, [{
-    key: "_onChange",
-    value: function _onChange(event) {
-      console.log(event.target.value, 'onchangeT');
-      console.log(event.target.name, 'nameT');
-      this.setState({
-        user: _defineProperty({}, event.target.name, event.target.value)
-      });
-    }
-  }, {
-    key: "userInfoEditHandler",
-    value: function userInfoEditHandler() {
-      console.log(this.state.formBool, 'clickHandleB');
-
-      if (this.state.formBool === true) {
-        this.setState({
-          formBool: false
-        });
-      } else if (this.state.formBool === false) {
-        this.setState({
-          formBool: true
-        });
-      }
-
-      console.log(this.state.formBool, 'clickHandleA');
-    }
-  }, {
-    key: "userInfoSaveHandler",
-    value: function userInfoSaveHandler() {
-      event.preventDefault(); // console.log(this.state.formBool, 'clickHandleB')
-
-      if (this.state.formBool === true) {
-        this.setState({
-          formBool: false
-        });
-      } else if (this.state.formBool === false) {
-        this.setState({
-          formBool: true
-        });
-      } // console.log(this.state.formBool, 'clickHandleA')
-
-
-      console.log('onsubmit', this.state); // this.props.addNewCampusProp(this.state)
-    } //componentDidMount(){
-    //this.props.fetchAllClass
-    //}
-
-  }, {
     key: "render",
+    //componentDidMount(){
+    //this.props.props.fetchAllClass
+    //}
     value: function render() {
-      console.log(this.props.user);
-      var _this$props = this.props,
-          form = _this$props.form,
-          user = _this$props.user;
-      return _react.default.createElement("div", null, this.state.formBool ? _react.default.createElement(_semanticUiReact.Container, null, _react.default.createElement(_semanticUiReact.Grid, {
+      console.log(this.props);
+      var user = this.props.user;
+      return _react.default.createElement("div", null, this.props.formBool ? _react.default.createElement(_semanticUiReact.Container, null, _react.default.createElement(_semanticUiReact.Grid, {
         padded: true,
         relaxed: true
       }, _react.default.createElement(_semanticUiReact.Grid.Row, null, _react.default.createElement(_semanticUiReact.Grid.Column, {
@@ -1511,7 +1460,7 @@ function (_Component) {
         size: "mini",
         floated: "right",
         compact: true,
-        onClick: this.userInfoEditHandler
+        onClick: this.props.userInfoEditHandler
       }, "Edit")) : _react.default.createElement(_semanticUiReact.Container, null, _react.default.createElement(_semanticUiReact.Grid, {
         padded: true,
         relaxed: true
@@ -1523,44 +1472,48 @@ function (_Component) {
       }, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_semanticUiReact.Form.Input, {
         name: "firstName",
         placeholder: user.firstName,
-        onChange: this._onChange
+        onChange: this.props._onChange
       })))), _react.default.createElement(_semanticUiReact.Grid.Row, null, _react.default.createElement(_semanticUiReact.Grid.Column, {
         width: 3,
         textAlign: "right"
       }, "Last Name:"), _react.default.createElement(_semanticUiReact.Grid.Column, {
         textAlign: "left"
       }, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_semanticUiReact.Form.Input, {
+        name: "lastName",
         placeholder: user.lastName,
-        onChange: this._onChange
+        onChange: this.props._onChange
       })))), _react.default.createElement(_semanticUiReact.Grid.Row, null, _react.default.createElement(_semanticUiReact.Grid.Column, {
         width: 3,
         textAlign: "right"
       }, "Email:"), _react.default.createElement(_semanticUiReact.Grid.Column, {
         textAlign: "left"
       }, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_semanticUiReact.Form.Input, {
+        name: "email",
         placeholder: user.email,
-        onChange: this._onChange
+        onChange: this.props._onChange
       })))), _react.default.createElement(_semanticUiReact.Grid.Row, null, _react.default.createElement(_semanticUiReact.Grid.Column, {
         width: 3,
         textAlign: "right"
       }, "Address:"), _react.default.createElement(_semanticUiReact.Grid.Column, {
         textAlign: "left"
       }, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_semanticUiReact.Form.Input, {
+        name: "email",
         placeholder: user.address,
-        onChange: this._onChange
+        onChange: this.props._onChange
       })))), _react.default.createElement(_semanticUiReact.Grid.Row, null, _react.default.createElement(_semanticUiReact.Grid.Column, {
         width: 3,
         textAlign: "right"
       }, "Address:"), _react.default.createElement(_semanticUiReact.Grid.Column, {
         textAlign: "left"
       }, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_semanticUiReact.Form.Input, {
+        name: "phone",
         placeholder: user.phone,
-        onChange: this._onChange
+        onChange: this.props._onChange
       }))))), _react.default.createElement(_semanticUiReact.Button, {
         size: "mini",
         floated: "right",
         compact: true,
-        onClick: this.userInfoSaveHandler
+        onClick: this.props.userInfoSaveHandler
       }, "Save")));
     }
   }]);

@@ -15,72 +15,17 @@ import {
 } from 'semantic-ui-react' //import FUNCTIONS from REDUCER
 
 class UserInfo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      user: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        address: '',
-        phone: ''
-      },
-      formBool: true
-    }
-    this._onChange = this._onChange.bind(this)
-    this._onSubmit = this._onSubmit.bind(this)
-    this.userInfoEditHandler = this.userInfoEditHandler.bind(this)
-    this.userInfoSaveHandler = this.userInfoSaveHandler.bind(this)
-  }
-
-  _onChange(event) {
-    console.log(event.target.value, 'onchangeT')
-    console.log(event.target.name, 'nameT')
-
-    this.setState({
-      user: {
-        [event.target.name]: event.target.value
-      }
-    })
-  }
-  _onSubmit = event => {
-    event.preventDefault()
-    console.log('onsubmit', this.state)
-    // this.props.addNewCampusProp(this.state)
-  }
-
-  userInfoEditHandler() {
-    console.log(this.state.formBool, 'clickHandleB')
-    if (this.state.formBool === true) {
-      this.setState({ formBool: false })
-    } else if (this.state.formBool === false) {
-      this.setState({ formBool: true })
-    }
-    console.log(this.state.formBool, 'clickHandleA')
-  }
-  userInfoSaveHandler() {
-    event.preventDefault()
-    // console.log(this.state.formBool, 'clickHandleB')
-    if (this.state.formBool === true) {
-      this.setState({ formBool: false })
-    } else if (this.state.formBool === false) {
-      this.setState({ formBool: true })
-    }
-    // console.log(this.state.formBool, 'clickHandleA')
-    console.log('onsubmit', this.state)
-    // this.props.addNewCampusProp(this.state)
-  }
   //componentDidMount(){
-  //this.props.fetchAllClass
+  //this.props.props.fetchAllClass
   //}
 
   render() {
-    console.log(this.props.user)
-    const { form, user } = this.props
+    console.log(this.props)
+    const { user } = this.props
 
     return (
       <div>
-        {this.state.formBool ? (
+        {this.props.formBool ? (
           <Container>
             <Grid padded relaxed>
               <Grid.Row>
@@ -118,7 +63,7 @@ class UserInfo extends Component {
               size="mini"
               floated="right"
               compact
-              onClick={this.userInfoEditHandler}
+              onClick={this.props.userInfoEditHandler}
             >
               Edit
             </Button>
@@ -135,7 +80,7 @@ class UserInfo extends Component {
                     <Form.Input
                       name="firstName"
                       placeholder={user.firstName}
-                      onChange={this._onChange}
+                      onChange={this.props._onChange}
                     />
                   </React.Fragment>
                 </Grid.Column>
@@ -147,8 +92,9 @@ class UserInfo extends Component {
                 <Grid.Column textAlign="left">
                   <React.Fragment>
                     <Form.Input
+                      name="lastName"
                       placeholder={user.lastName}
-                      onChange={this._onChange}
+                      onChange={this.props._onChange}
                     />
                   </React.Fragment>
                 </Grid.Column>
@@ -160,8 +106,9 @@ class UserInfo extends Component {
                 <Grid.Column textAlign="left">
                   <React.Fragment>
                     <Form.Input
+                      name="email"
                       placeholder={user.email}
-                      onChange={this._onChange}
+                      onChange={this.props._onChange}
                     />
                   </React.Fragment>
                 </Grid.Column>
@@ -173,8 +120,9 @@ class UserInfo extends Component {
                 <Grid.Column textAlign="left">
                   <React.Fragment>
                     <Form.Input
+                      name="email"
                       placeholder={user.address}
-                      onChange={this._onChange}
+                      onChange={this.props._onChange}
                     />
                   </React.Fragment>
                 </Grid.Column>
@@ -186,8 +134,9 @@ class UserInfo extends Component {
                 <Grid.Column textAlign="left">
                   <React.Fragment>
                     <Form.Input
+                      name="phone"
                       placeholder={user.phone}
-                      onChange={this._onChange}
+                      onChange={this.props._onChange}
                     />
                   </React.Fragment>
                 </Grid.Column>
@@ -197,7 +146,7 @@ class UserInfo extends Component {
               size="mini"
               floated="right"
               compact
-              onClick={this.userInfoSaveHandler}
+              onClick={this.props.userInfoSaveHandler}
             >
               Save
             </Button>

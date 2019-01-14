@@ -19,14 +19,13 @@ class UserHome extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {
-        firstName: 'John',
-        lastName: 'Adams',
-        address: '123 america lane',
-        email: 'JohnthePRES@america.colony',
-        phone: '212-100-6793'
-      },
-      formBool: false,
+      firstName: 'John',
+      lastName: 'Adams',
+      address: '123 america lane',
+      email: 'JohnthePRES@america.colony',
+      phone: '212-100-6793',
+
+      formBool: true,
       orders: [
         {
           orderId: 1,
@@ -66,8 +65,24 @@ class UserHome extends Component {
         }
       ]
     }
+    this._onChange = this._onChange.bind(this)
+    this._onSubmit = this._onSubmit.bind(this)
     this.userInfoEditHandler = this.userInfoEditHandler.bind(this)
     this.userInfoSaveHandler = this.userInfoSaveHandler.bind(this)
+  }
+
+  _onChange(event) {
+    console.log(event.target.value, 'onchangeT')
+    console.log(event.target.name, 'nameT')
+
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+  _onSubmit = event => {
+    event.preventDefault()
+    console.log('onsubmit', this.state)
+    // this.props.addNewCampusProp(this.state)
   }
 
   userInfoEditHandler() {
@@ -80,24 +95,27 @@ class UserHome extends Component {
     console.log(this.state.formBool, 'clickHandleA')
   }
   userInfoSaveHandler() {
-    console.log(this.state.formBool, 'clickHandleB')
+    event.preventDefault()
+    // console.log(this.state.formBool, 'clickHandleB')
     if (this.state.formBool === true) {
       this.setState({ formBool: false })
     } else if (this.state.formBool === false) {
       this.setState({ formBool: true })
     }
-    console.log(this.state.formBool, 'clickHandleA')
+    // console.log(this.state.formBool, 'clickHandleA')
+    console.log('onsubmit', this.state)
+    // this.props.addNewCampusProp(this.state)
   }
   //componentDidMount(){
   //this.props.fetchAllClass
   //}
 
   render() {
-    //const {Classes} = this. props
+    // const {Classes} = this. props
 
     return (
       <div>
-        <Header as="h2">Welcome, {this.state.user.firstName}</Header>
+        <Header as="h2">Welcome, {this.state.firstName}</Header>
         <Divider fitted />
         <React.Fragment>
           <Divider horizontal>
@@ -108,27 +126,14 @@ class UserHome extends Component {
           </Divider>
         </React.Fragment>
         <Container floated="center">
-          <UserInfo form={this.state.formBool} user={this.state.user} />
-
-          {/* {this.state.formBool ? (
-            <Button
-              size="mini"
-              floated="right"
-              compact
-              onClick={this.userInfoEditHandler}
-            >
-              Edit
-            </Button>
-          ) : (
-            <Button
-              size="mini"
-              floated="right"
-              compact
-              onClick={this.userInfoSaveHandler}
-            >
-              Save
-            </Button>
-          )} */}
+          <UserInfo
+            formBool={this.state.formBool}
+            user={this.state}
+            _onChange={this._onChange}
+            _onSubmit={this._onSubmit}
+            userInfoEditHandler={this.userInfoEditHandler}
+            userInfoSaveHandler={this.userInfoSaveHandler}
+          />
         </Container>
 
         <Divider fitted section />
