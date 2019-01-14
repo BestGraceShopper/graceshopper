@@ -1,16 +1,20 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Card, Icon, Image, Button} from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
-import {getProduct} from '../store/reducers/product'
+import { getProduct, addToCart } from '../store/reducers/product'
 
 class SingleProduct extends Component {
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id)
   }
+  handleAddToCart(product) {
+    this.props.addToCart(product)
+  }
 
   render() {
-    const {product} = this.props
+    const { product } = this.props
+    console.log(this.props.product.imageUrl)
     return (
       <Card>
         <Image centered height={300} width={300} src={product.imageUrl} />
@@ -24,7 +28,11 @@ class SingleProduct extends Component {
         </Card.Content>
         <Card.Content extra>
           <div className="ui two buttons">
-            <Button primary animated="vertical">
+            <Button
+              primary
+              animated="vertical"
+              onClick={() => this.handleAddToCart(product)}
+            >
               <Button.Content hidden>Add to Cart</Button.Content>
               <Button.Content visible>
                 <Icon name="shop" />
@@ -38,15 +46,14 @@ class SingleProduct extends Component {
 }
 
 const mapStateToProps = state => {
-  const {singleProduct} = state.product
-  return {product: singleProduct}
+  const { singleProduct } = state.product
+  return { product: singleProduct }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSingleProduct: id => {
-      dispatch(getProduct(id))
-    }
+    fetchSingleProduct: id => dispatch(getProduct(id)),
+    addToCart: product => dispatch(addToCart(product))
   }
 }
 
