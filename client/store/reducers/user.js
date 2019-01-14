@@ -13,13 +13,14 @@ const REMOVE_USER = 'REMOVE_USER'
 const removeUser = () => ({ type: REMOVE_USER })
 
 const authenticating = () => ({
-  type: AUTH_REQUEST
+  type: AUTH_REQUEST,
+  login: true
 })
 
 const authenticate = userData => ({
   type: AUTH_SUCCESS,
   user: userData,
-  login: true
+  login: false
 })
 
 const authError = error => ({
@@ -89,13 +90,13 @@ const initialState = {
   user: {
     email: ''
   },
-  login: false
+  login: true
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case AUTH_REQUEST:
-      return { ...state, isFetching: true }
+      return { ...state, login: action.login, isFetching: true }
     case AUTH_SUCCESS:
       return { user: action.user, login: action.login, isFetching: false }
     case REMOVE_USER:
