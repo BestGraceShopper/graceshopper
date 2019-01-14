@@ -810,7 +810,6 @@ function (_Component) {
     value: function render() {
       var activeItem = this.state.activeItem;
       var login = this.props.login;
-      console.log(login);
       return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Menu, {
         pointing: true
       }, _react.default.createElement(_semanticUiReact.Menu.Item, {

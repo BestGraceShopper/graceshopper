@@ -16,7 +16,6 @@ class Navbar extends Component {
   render() {
     const { activeItem } = this.state
     const { login } = this.props
-    console.log(login)
     return (
       <div>
         <Menu pointing>
