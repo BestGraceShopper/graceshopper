@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Grid} from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Grid } from 'semantic-ui-react'
 
 import ProductCard from './ProductCard'
-import {getAllProducts, addToCart} from '../store/reducers/product'
+import { getAllProducts, addToCart } from '../store/reducers/product'
 
 class ProductList extends Component {
   componentDidMount() {
@@ -31,7 +31,6 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     products: state.product.products
   }

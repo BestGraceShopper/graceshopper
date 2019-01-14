@@ -2,13 +2,19 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { me } from '../store/reducers/user'
+import { me, logout } from '../store/reducers/user'
 
 class Navbar extends Component {
   state = { activeItem: 'home' }
 
   handleItemClick = (evt, { name }) => this.setState({ activeItem: name })
 
+  handleLogOut() {
+    logout()
+  }
+  componentDidMount() {
+    console.log(this.props)
+  }
   render() {
     const { activeItem } = this.state
     const { login } = this.props
@@ -34,7 +40,7 @@ class Navbar extends Component {
           />
 
           <Menu.Menu position="right">
-            {login ? (
+            {this.props.user.email ? (
               <Menu.Item
                 as={Link}
                 to="/login"
@@ -53,6 +59,14 @@ class Navbar extends Component {
                 onClick={this.handleItemClick}
               />
             )}
+            {!this.props.user.email ? (
+              <Menu.Item
+                name="Log Out"
+                icon="remove user"
+                onClick={this.handleLogOut}
+              />
+            ) : null}
+
             <Menu.Item
               as={Link}
               to="/cart"
@@ -69,8 +83,8 @@ class Navbar extends Component {
 }
 
 const mapPropsToState = state => {
-  // console.log(state, 'mapnavprop')
   return {
+    user: state.user,
     login: state.user.login
   }
 }

@@ -6,6 +6,7 @@ router.put('/user/:id/:method', async (req, res, next) => {
   try {
     let { method, id } = req.params
     const cart = req.body
+    console.log('this is our cart: ', cart)
     let ordered
 
     if (id === 'guest') id = null
