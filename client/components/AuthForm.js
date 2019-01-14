@@ -1,12 +1,13 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {auth} from '../store'
+import { connect } from 'react-redux'
+import { auth } from '../store'
+import PropTypes from 'prop-types'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+  const { name, displayName, handleSubmit, error } = props
 
   return (
     <div>
@@ -81,3 +82,5 @@ AuthForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }
+
+export default AuthForm

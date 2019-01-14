@@ -1,21 +1,19 @@
 import React from 'react'
-import { Item } from 'semantic-ui-react'
-import CartItem from './CartItem'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Cart from './Cart'
 import CustomerForm from './CustomerForm'
-import { connect } from 'react-redux'
-// import { "cartReducerGoesHere" } from '../store/reducers/product'
+import { purchaseOrder } from '../store/reducers/product'
 
 export default class Checkout extends React.Component {
   render() {
-    // const { item } = this.props
     return (
       <div>
         <div>
           <Cart />
         </div>
         <div>
-          <CustomerForm />
+          <CustomerForm user={this.props.user} />
         </div>
       </div>
     )
