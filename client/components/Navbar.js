@@ -12,9 +12,7 @@ class Navbar extends Component {
   handleLogOut() {
     logout()
   }
-  componentDidMount() {
-    console.log(this.props)
-  }
+
   render() {
     const { activeItem } = this.state
     const { login } = this.props
