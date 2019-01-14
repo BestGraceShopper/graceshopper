@@ -16,7 +16,6 @@ class Navbar extends Component {
   render() {
     const { activeItem } = this.state
     const { login } = this.props
-
     return (
       <div>
         <Menu pointing>
@@ -38,7 +37,7 @@ class Navbar extends Component {
           />
 
           <Menu.Menu position="right">
-            {this.props.user.email ? (
+            {login ? (
               <Menu.Item
                 as={Link}
                 to="/login"
@@ -57,7 +56,7 @@ class Navbar extends Component {
                 onClick={this.handleItemClick}
               />
             )}
-            {!this.props.user.email ? (
+            {!login ? (
               <Menu.Item
                 name="Log Out"
                 icon="remove user"
