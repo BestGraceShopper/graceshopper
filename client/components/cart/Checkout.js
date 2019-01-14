@@ -1,9 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import Cart from './Cart'
 import CustomerForm from './CustomerForm'
-import { purchaseOrder } from '../store/reducers/product'
+import Cart from './Cart'
 
 export default class Checkout extends React.Component {
   render() {
