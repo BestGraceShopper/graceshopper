@@ -32,11 +32,13 @@ class FormSuccess extends Component {
       <Form success>
         <Form.Input
           label="First Name"
-          placeholder={isLoggedIn ? user.firstName : 'first name'}
+          placeholder={
+            isLoggedIn ? user.firstName || 'first name' : 'first name'
+          }
         />
         <Form.Input
           label="Last Name"
-          placeholder={isLoggedIn ? user.lastName : 'last name'}
+          placeholder={isLoggedIn ? user.lastName || 'last name' : 'last name'}
         />
         <Form.Input
           label="Address"
