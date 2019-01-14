@@ -15,7 +15,6 @@ const initialState = {
 
 export const addToCart = product => dispatch => {
   try {
-    console.log('yo')
     dispatch(addCart(product))
   } catch (error) {
     console.error(error)
