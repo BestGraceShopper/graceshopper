@@ -1,39 +1,89 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { Button, Message, Form } from 'semantic-ui-react'
+import {
+  Button,
+  Form,
+  Divider,
+  Grid,
+  Segment,
+  Modal,
+  Header
+} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
 import { author } from '../../store'
 
-const Login = props => {
-  const { name, displayName, handleSubmit, status, error } = props
+class Login extends React.Component {
+  state = { open: false }
 
-  return (
-    <div>
-      <Form error onSubmit={handleSubmit} name={name}>
-        <Form.Field>
-          <label>Email</label>
-          <input name="email" placeholder="Email" />
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <input name="password" placeholder="Password" />
-        </Form.Field>
-        <Button type="submit">{displayName}</Button>
-        <Message attached="bottom" warning>
-          {/* <Icon name="help" /> */}
-          Already signed up?&nbsp;<a href="/login">Login here</a>&nbsp;instead.
-        </Message>
-        {/* <Message error>
-          <Message.Header>Invalid Email or Password!</Message.Header>
-        </Message> */}
-      </Form>
-      {/* <Message attached="bottom" warning>
-        <Route>Already signed Up? LoginHere</Route>
-      </Message> */}
-    </div>
-  )
+  show = dimmer => () => this.setState({ dimmer, open: true })
+  close = () => this.setState({ open: false })
+
+  render() {
+    const { name, displayName, handleSubmit, status, error } = this.props
+    const { open, dimmer } = this.state
+    return (
+      <Segment placeholder>
+        <Grid columns={2} relaxed="very" stackable>
+          <Grid.Column>
+            <Form name="login" onSubmit={handleSubmit}>
+              <Form.Input
+                icon="user"
+                iconPosition="left"
+                label="Email"
+                placeholder="Email"
+                name="email"
+              />
+              <Form.Input
+                icon="lock"
+                iconPosition="left"
+                label="Password"
+                type="password"
+                name="password"
+              />
+
+              <Button content="Login" primary type="submit" />
+            </Form>
+          </Grid.Column>
+
+          <Grid.Column verticalAlign="middle">
+            <Button
+              content="Sign Up"
+              icon="signup"
+              size="big"
+              onClick={this.show(true)}
+            />
+          </Grid.Column>
+        </Grid>
+        <Divider vertical>Or</Divider>
+
+        <Modal dimmer={dimmer} open={open} onClose={this.close}>
+          <Modal.Header>Signup</Modal.Header>
+          <Modal.Content>
+            <Modal.Description>
+              <Form name="signup" onSubmit={handleSubmit}>
+                <Form.Input
+                  icon="user"
+                  iconPosition="left"
+                  label="Email"
+                  name="email"
+                />
+                <Form.Input
+                  icon="lock"
+                  type="password"
+                  iconPosition="left"
+                  label="Password"
+                  name="password"
+                />
+                <Button content="Sign Up" primary type="submit" />
+              </Form>
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
+      </Segment>
+    )
+  }
 }
 
 const mapLoginToState = state => {
@@ -58,6 +108,7 @@ const mapDispatchToState = dispatch => {
     handleSubmit(evt) {
       console.log(evt.target, 'HSEVT')
       evt.preventDefault()
+
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
