@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import {
   Header,
   Icon,
   Container,
   Divider,
-  List,
   Button,
-  Grid,
-  GridColumn,
   Table
 } from 'semantic-ui-react'
 import UserInfo from './UserInfo'
