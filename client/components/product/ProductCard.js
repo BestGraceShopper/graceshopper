@@ -28,8 +28,8 @@ const ProductCard = props => (
           primary
           animated="vertical"
         >
-          <Button.Content hidden>Add to Cart</Button.Content>
-          <Button.Content visible>
+          <Button.Content visible>Add to Cart</Button.Content>
+          <Button.Content hidden>
             <Icon name="shop" />
           </Button.Content>
         </Button>

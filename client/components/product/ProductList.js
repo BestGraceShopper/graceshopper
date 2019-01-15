@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Grid } from 'semantic-ui-react'
 
 import ProductCard from './ProductCard'
+import { Link } from 'react-router-dom'
 import { getAllProducts } from '../../store/reducers/product'
 import { addToCart } from '../../store/reducers/cart'
 

@@ -56,15 +56,26 @@ async function seed() {
       price: 5.0,
       tags: ['Pacifier', 'set', 'of', 'two'],
       inventory: 15
+    }),
+    Product.create({
+      name: 'Baby Camera',
+      description:
+        'The best modern technology for keeping an eye on your bundle of joy',
+      imageUrl:
+        'https://www.dhresource.com/0x0s/f2-albu-g5-M01-1A-79-rBVaI1kJv0qAX37AAAFTxxhQzio614.jpg/video-baby-monitor-vb603-security-mini-camera.jpg',
+      price: 300.0,
+      tags: ['Camera', 'Tech'],
+      inventory: 10
+    }),
+    Product.create({
+      name: 'Baby Bottle',
+      description: 'Everyone needs a baby bottle',
+      imageUrl:
+        'https://target.scene7.com/is/image/Target/GUEST_e0ac17af-2ad2-48fb-943a-4f33ced294f8?wid=488&hei=488&fmt=pjpeg',
+      price: 10.0,
+      tags: ['Bottle', 'Milk'],
+      inventory: 15
     })
-    // Product.create({
-    //   name: '',
-    //   description: '',
-    //   imageUrl: '',
-    //   price: 0.0,
-    //   tags: [''],
-    //   inventory: 15
-    // })
   ])
 
   console.log(`seeded ${users.length} users`)
