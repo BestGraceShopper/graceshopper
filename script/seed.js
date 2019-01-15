@@ -25,7 +25,7 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      name: 'Baby Blue sock',
+      name: 'Baby Blue Sock',
       description: "It's a sock. For your baby. Note: Only includes one sock.",
       imageUrl:
         'https://assets.marthastewart.com/styles/wmax-570/d15/blue-baby-socks/blue-baby-socks_0_sq.jpg?itok=4TgWrMi3',

@@ -30,5 +30,5 @@ const ProductCard = props => (
     </Card.Content>
   </Card>
 )
-
+export { Card, Image, Icon, Button }
 export default ProductCard
