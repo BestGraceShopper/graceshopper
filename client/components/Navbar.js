@@ -10,7 +10,7 @@ class Navbar extends Component {
   handleItemClick = (evt, { name }) => this.setState({ activeItem: name })
 
   handleLogOut() {
-    logout()
+    this.props.logout()
   }
 
   render() {
@@ -58,9 +58,9 @@ class Navbar extends Component {
             )}
             {!login ? (
               <Menu.Item
-                name="Log Out"
+                name="Logout"
                 icon="remove user"
-                onClick={this.handleLogOut}
+                onClick={this.handleLogOut.bind(this)}
               />
             ) : null}
 
@@ -86,9 +86,11 @@ const mapPropsToState = state => {
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return {}
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
 
-const connectedNavBar = connect(mapPropsToState)(Navbar)
+const connectedNavBar = connect(mapPropsToState, mapDispatchToProps)(Navbar)
 export default connectedNavBar
