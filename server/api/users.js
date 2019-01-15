@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc')
 
 const User = require('../db/models/user')
 const UserOrder = require('../db/models/userOrder')
@@ -36,6 +37,21 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // purchase route
+router.post('/:id/cart/charge', async (req, res) => {
+  try {
+    let { status } = await stripe.charges.create({
+      amount: 2000,
+      currency: 'usd',
+      description: 'An example charge',
+      source: req.body
+    })
+
+    res.json({ status })
+  } catch (err) {
+    res.status(500).end()
+  }
+})
+
 router.put('/:id/cart', async (req, res, next) => {
   try {
     let { id } = req.params
