@@ -4,7 +4,14 @@ import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
 const ProductCard = props => (
   <Card>
-    <Image centered height={150} width={150} src={props.product.imageUrl} />
+    <Image
+      as={Link}
+      to={`/products/${props.product.id}`}
+      centered
+      height={150}
+      width={150}
+      src={props.product.imageUrl}
+    />
     <Card.Content>
       <Card.Header>{props.product.name}</Card.Header>
       <Card.Meta>
