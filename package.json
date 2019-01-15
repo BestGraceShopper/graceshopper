@@ -21,7 +21,8 @@
     "start": "node server",
     "start-dev": "npm run seed & NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha \"./server/db/modelspecs/*.specs.js\" \"./server/api/apispecs/**.spec.js\" \"./client/components/testspecs/**.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+    "test": "NODE_ENV='test' mocha \"./server/db/modelspecs/*.specs.js\" \"./server/api/apispecs/**.spec.js\" \"./client/components/testspecs/**.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
+    "stripe": "^6.20.0"
   },
   "lint-staged": {
     "*.{js,jsx}": [
