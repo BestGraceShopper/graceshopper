@@ -76,14 +76,6 @@ async function seed() {
       tags: ['Bottle', 'Milk'],
       inventory: 15
     })
-    // Product.create({
-    //   name: '',
-    //   description: '',
-    //   imageUrl: '',
-    //   price: 0.0,
-    //   tags: [''],
-    //   inventory: 15
-    // })
   ])
 
   console.log(`seeded ${users.length} users`)
