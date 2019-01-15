@@ -23,22 +23,22 @@ const UserOrdersProduct = require('../db/models/userOrdersProduct')
 // get user info
 router.get('/:id', async (req, res, next) => {
   try {
-    // if (req.user.id === Number(req.params.id)) {
-    const users = await User.findOne({
-      where: {
-        id: req.params.id
-      },
-      attributes: ['id', 'email', 'firstName', 'lastName', 'address', 'phone']
-    })
-    res.json(users)
-    // }    else {
-    //   res.sendStatus(403)
-    // }
+    if (req.user.id === Number(req.params.id)) {
+      const users = await User.findOne({
+        where: {
+          id: req.params.id
+        },
+        attributes: ['id', 'email', 'firstName', 'lastName', 'address', 'phone']
+      })
+      res.json(users)
+    } else {
+      res.sendStatus(403)
+    }
   } catch (err) {
     next(err)
   }
 })
-
+// update info
 router.put('/:id', async (req, res, next) => {
   const { id } = req.params
   const updatedUserInfo = {
@@ -49,25 +49,25 @@ router.put('/:id', async (req, res, next) => {
   }
 
   try {
-    // if (req.user.id === Number(id)) {
-    const updatedUserID = await User.update(updatedUserInfo, {
-      where: {
-        id: id
-      },
-      returning: true,
-      plain: true
-    })
+    if (req.user.id === Number(req.params.id)) {
+      const updatedUserID = await User.update(updatedUserInfo, {
+        where: {
+          id: id
+        },
+        returning: true,
+        plain: true
+      })
 
-    if (!updatedUserID) {
-      const err = Error('not found')
-      err.status = 404
-      throw err
+      if (!updatedUserID) {
+        const err = Error('not found')
+        err.status = 404
+        throw err
+      } else {
+        res.json(updatedUserID)
+      }
     } else {
-      res.json(updatedUserID)
+      res.sendStatus(403)
     }
-    // } else {
-    //   res.sendStatus(403)
-    // }
   } catch (error) {
     next(error)
   }
@@ -78,13 +78,17 @@ router.put('/:id', async (req, res, next) => {
 router.get('/:id/cart', async (req, res, next) => {
   let { id } = req.params
   try {
-    const userOrder = await UserOrder.findOne({
-      where: {
-        userId: id,
-        ordered: false
-      }
-    })
-    res.json(userOrder)
+    if (req.user.id === Number(req.params.id)) {
+      const userOrder = await UserOrder.findOne({
+        where: {
+          userId: id,
+          ordered: false
+        }
+      })
+      res.json(userOrder)
+    } else {
+      res.sendStatus(403)
+    }
   } catch (error) {
     next(error)
   }
@@ -96,14 +100,18 @@ router.post('/:id/cart', async (req, res, next) => {
   // if no user id, then session ID will need to be used
   // need to verify no other carts exist - findorcreate
   try {
-    const userOrder = await UserOrder.findOrCreate({
-      where: {
-        ordered: false,
-        userId: id
-      },
-      defaults: { totalPrice: 1 }
-    })
-    res.json(userOrder)
+    if (req.user.id === Number(req.params.id)) {
+      const userOrder = await UserOrder.findOrCreate({
+        where: {
+          ordered: false,
+          userId: id
+        },
+        defaults: { totalPrice: 1 }
+      })
+      res.json(userOrder)
+    } else {
+      res.sendStatus(403)
+    }
   } catch (error) {
     next(error)
   }
@@ -113,23 +121,27 @@ router.post('/:id/cart', async (req, res, next) => {
 router.put('/:id/cart', async (req, res, next) => {
   const cart = req.body
   try {
-    const purchasedUserOrder = await UserOrder.update(
-      {
-        ordered: true
-      },
-      {
-        where: {
-          id: cart.orderId
+    if (req.user.id === Number(req.params.id)) {
+      const purchasedUserOrder = await UserOrder.update(
+        {
+          ordered: true
+        },
+        {
+          where: {
+            id: cart.orderId
+          }
         }
-      }
-    )
+      )
 
-    if (!purchasedUserOrder) {
-      const err = Error('Cart not found')
-      err.status = 404
-      throw err
+      if (!purchasedUserOrder) {
+        const err = Error('Cart not found')
+        err.status = 404
+        throw err
+      } else {
+        res.status(200).json(purchasedUserOrder)
+      }
     } else {
-      res.status(200).json(purchasedUserOrder)
+      res.sendStatus(403)
     }
   } catch (error) {
     next(error)
@@ -144,47 +156,51 @@ router.post('/:id/cart/product', async (req, res, next) => {
     quant = 1
   }
   try {
-    let userOrdersProduct = await UserOrdersProduct.findOrCreate({
-      where: {
-        orderId: cart.orderId,
-        productId: cart.productId
-      },
-      defaults: {
-        quantity: quant
-      }
-    })
-    if (!userOrdersProduct) {
-      const err = Error('Cart not found')
-      err.status = 404
-      throw err
-    }
-    if (userOrdersProduct[1] === false) {
-      if (cart.quantity === 0) {
-        quant = userOrdersProduct[0].quantity + 1
-      } else {
-        quant = cart.quantity
-      }
-
-      let updatedUserOrdersProduct = await UserOrdersProduct.update(
-        {
-          quantity: quant
+    if (req.user.id === Number(req.params.id)) {
+      let userOrdersProduct = await UserOrdersProduct.findOrCreate({
+        where: {
+          orderId: cart.orderId,
+          productId: cart.productId
         },
-        {
-          where: {
-            orderId: cart.orderId,
-            productId: cart.productId
-          }
+        defaults: {
+          quantity: quant
         }
-      )
-      if (!updatedUserOrdersProduct) {
+      })
+      if (!userOrdersProduct) {
         const err = Error('Cart not found')
         err.status = 404
         throw err
+      }
+      if (userOrdersProduct[1] === false) {
+        if (cart.quantity === 0) {
+          quant = userOrdersProduct[0].quantity + 1
+        } else {
+          quant = cart.quantity
+        }
+
+        let updatedUserOrdersProduct = await UserOrdersProduct.update(
+          {
+            quantity: quant
+          },
+          {
+            where: {
+              orderId: cart.orderId,
+              productId: cart.productId
+            }
+          }
+        )
+        if (!updatedUserOrdersProduct) {
+          const err = Error('Cart not found')
+          err.status = 404
+          throw err
+        } else {
+          res.json(updatedUserOrdersProduct)
+        }
       } else {
-        res.json(updatedUserOrdersProduct)
+        res.json(userOrdersProduct)
       }
     } else {
-      res.json(userOrdersProduct)
+      res.sendStatus(403)
     }
   } catch (error) {
     next(error)
@@ -195,18 +211,22 @@ router.post('/:id/cart/product', async (req, res, next) => {
 router.delete('/:id/cart/product', async (req, res, next) => {
   const cart = req.body
   try {
-    const deletedUserOrdersProduct = await UserOrdersProduct.destroy({
-      where: {
-        orderId: cart.orderId,
-        productId: cart.productId
+    if (req.user.id === Number(req.params.id)) {
+      const deletedUserOrdersProduct = await UserOrdersProduct.destroy({
+        where: {
+          orderId: cart.orderId,
+          productId: cart.productId
+        }
+      })
+      if (deletedUserOrdersProduct < 1) {
+        const err = Error('Error: Cannot delete product')
+        err.status = 404
+        throw err
+      } else {
+        res.status(204).json(req.params.id)
       }
-    })
-    if (deletedUserOrdersProduct < 1) {
-      const err = Error('Error: Cannot delete product')
-      err.status = 404
-      throw err
     } else {
-      res.status(204).json(req.params.id)
+      res.sendStatus(403)
     }
   } catch (error) {
     next(error)
@@ -217,13 +237,17 @@ router.delete('/:id/cart/product', async (req, res, next) => {
 router.get('/:id/orders', async (req, res, next) => {
   const { id } = req.params
   try {
-    const userOrders = await UserOrder.findAll({
-      where: {
-        userId: id,
-        ordered: true
-      }
-    })
-    res.send(userOrders)
+    if (req.user.id === Number(req.params.id)) {
+      const userOrders = await UserOrder.findAll({
+        where: {
+          userId: id,
+          ordered: true
+        }
+      })
+      res.send(userOrders)
+    } else {
+      res.sendStatus(403)
+    }
   } catch (error) {
     next(error)
   }
