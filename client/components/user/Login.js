@@ -106,7 +106,6 @@ const mapSignupToState = state => {
 const mapDispatchToState = dispatch => {
   return {
     handleSubmit(evt) {
-      console.log(evt.target, 'HSEVT')
       evt.preventDefault()
 
       const formName = evt.target.name
