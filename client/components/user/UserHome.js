@@ -7,6 +7,7 @@ import {
   Button,
   Table
 } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 import UserInfo from './UserInfo'
 
 class UserHome extends Component {
@@ -91,9 +92,10 @@ class UserHome extends Component {
   }
 
   render() {
+    const user = this.props.user
     return (
       <div>
-        <Header as="h2">Welcome, {this.state.firstName}</Header>
+        <Header as="h2">Welcome, {user.firstName}</Header>
         <Divider fitted />
         <React.Fragment>
           <Divider horizontal>
@@ -106,7 +108,7 @@ class UserHome extends Component {
         <Container floated="center">
           <UserInfo
             formBool={this.state.formBool}
-            user={this.state}
+            user={user}
             _onChange={this._onChange}
             _onSubmit={this._onSubmit}
             userInfoEditHandler={this.userInfoEditHandler}
@@ -160,4 +162,10 @@ class UserHome extends Component {
   }
 }
 
-export default UserHome
+const mapStateToProps = state => {
+  return {
+    user: state.user.user
+  }
+}
+
+export default connect(mapStateToProps)(UserHome)
