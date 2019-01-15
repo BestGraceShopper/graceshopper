@@ -17,9 +17,15 @@ export default class CartItem extends React.Component {
   }
 
   render() {
-    const options = () => {
+    const options = quant => {
       let arr = []
-      for (let i = 1; i <= 10; i++) {
+      let i
+      if (quant >= 10) {
+        i = quant - 5
+      } else {
+        i = 0
+      }
+      for (i; i <= quant + 5; i++) {
         arr.push({ key: i, text: i, value: i })
       }
       return arr
@@ -33,6 +39,7 @@ export default class CartItem extends React.Component {
         <Item.Content>
           <Item.Header>{product.name}</Item.Header>
           <Item.Meta>${product.price}</Item.Meta>
+          <Item.Meta> Quantity: {product.quantity}</Item.Meta>
           <Item.Description>
             <span>{product.description}</span>
           </Item.Description>
@@ -43,8 +50,8 @@ export default class CartItem extends React.Component {
             <Menu compact floated="right">
               <Dropdown
                 labeled={true}
-                defaultValue={1}
-                options={options()}
+                defaultValue={product.quantity}
+                options={options(product.quantity)}
                 onChange={this.getQuantity}
                 simple
                 item
