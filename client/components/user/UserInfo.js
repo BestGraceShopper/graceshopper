@@ -124,7 +124,7 @@ class UserInfo extends Component {
               </Grid.Row>
               <Grid.Row>
                 <Grid.Column width={3} textAlign="right">
-                  Address:
+                  Phone:
                 </Grid.Column>
                 <Grid.Column textAlign="left">
                   <React.Fragment>

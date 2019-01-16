@@ -30,6 +30,7 @@ router.get('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   const { id } = req.params
   const updatedUserInfo = {
+    email: req.body.email,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     address: req.body.address,

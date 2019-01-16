@@ -14,55 +14,18 @@ import {
 } from 'semantic-ui-react'
 import UserInfo from './UserInfo'
 
+import { getUpdatedUser } from '../../store/reducers/user'
+
 class UserHome extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstName: 'John',
-      lastName: 'Adams',
-      address: '123 america lane',
-      email: 'JohnthePRES@america.colony',
-      phone: '212-100-6793',
-
-      formBool: true,
-      orders: [
-        {
-          orderId: 1,
-          orderDate: 'January 5th, 2019',
-          orderPrice: '$74.99',
-          orderStatus: 'Completed'
-        },
-        {
-          orderId: 2,
-          orderDate: 'January 6th, 2019',
-          orderPrice: '$99.99',
-          orderStatus: 'Completed'
-        },
-        {
-          orderId: 3,
-          orderDate: 'January 10th, 2019',
-          orderPrice: '$250.00',
-          orderStatus: 'Shipped'
-        },
-        {
-          orderId: 4,
-          orderDate: 'January 15th, 2019',
-          orderPrice: '$47.99',
-          orderStatus: 'Future'
-        },
-        {
-          orderId: 5,
-          orderDate: 'January 3rd, 2019',
-          orderPrice: '$19.99',
-          orderStatus: 'Shipped'
-        },
-        {
-          orderId: 6,
-          orderDate: 'January 11th, 2019',
-          orderPrice: '$25.89',
-          orderStatus: 'Pending'
-        }
-      ]
+      firstName: '',
+      lastName: '',
+      address: '',
+      email: '',
+      phone: '',
+      formBool: true
     }
     this._onChange = this._onChange.bind(this)
     this._onSubmit = this._onSubmit.bind(this)
@@ -77,6 +40,9 @@ class UserHome extends Component {
   }
   _onSubmit = event => {
     event.preventDefault()
+    const updatedUserInfo = this.state
+    const id = 1
+    this.props.fetchUpdatedUser(updatedUserInfo, id)
   }
 
   userInfoEditHandler() {
@@ -93,6 +59,9 @@ class UserHome extends Component {
     } else if (this.state.formBool === false) {
       this.setState({ formBool: true })
     }
+    const updatedUserInfo = this.state
+    const id = 1
+    this.props.fetchUpdatedUser(updatedUserInfo, id)
   }
 
   render() {
@@ -140,7 +109,7 @@ class UserHome extends Component {
                 <Table.HeaderCell>Order Details</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
-            <Table.Body>
+            {/* <Table.Body>
               {this.state.orders.map(order => {
                 return (
                   <Table.Row key={order.orderId}>
@@ -156,7 +125,7 @@ class UserHome extends Component {
                   </Table.Row>
                 )
               })}
-            </Table.Body>
+            </Table.Body> */}
           </Table>
         </Container>
         <Divider section hidden />
@@ -165,4 +134,20 @@ class UserHome extends Component {
   }
 }
 
-export default UserHome
+const mapState = state => {
+  return {
+    cart: state.cart.cart,
+    user: state.user.user,
+    cartData: state.cart.cartData
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    fetchUpdatedUser: (userInfo, userId) => {
+      dispatch(getUpdatedUser(userInfo, userId))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)

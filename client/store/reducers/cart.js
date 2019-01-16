@@ -48,6 +48,9 @@ export const addToCart = addProductInfo => async dispatch => {
   }
 
   try {
+    // not good because hard coded
+    const newCartData = await axios.post(`/api/users/1/cart`)
+    console.log(newCartData)
     const dataProduct = await axios.post(
       `/api/users/1/cart/product`,
       addInfoPlus

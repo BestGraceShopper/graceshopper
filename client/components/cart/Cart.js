@@ -44,7 +44,13 @@ class Cart extends React.Component {
         </div>
         <Divider />
         <div>
-          <h3 position="right">Total Price: {`$1,000,000`}</h3>
+          <h3 position="right">
+            Total Price: $
+            {cart.reduce((accum, product) => {
+              accum += product.quantity * product.product.price
+              return accum
+            }, 0)}
+          </h3>
         </div>
         <Divider />
         <div>
