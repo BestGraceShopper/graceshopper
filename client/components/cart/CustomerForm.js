@@ -34,7 +34,8 @@ const mapStateToProps = state => {
     isLoggedIn: !!state.user.user.id,
     products: state.product.products,
     cart: state.cart.cart,
-    orderSummary: state.product.orderSummary
+    orderSummary: state.product.orderSummary,
+    cartData: state.cart.cartData
   }
 }
 
