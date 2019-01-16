@@ -48,7 +48,7 @@ class CartItem extends Component {
     }
 
     const { product, quantity, removeFromCart } = this.props
-
+    console.log(this.props)
     return (
       <Item>
         <Item.Image src={product.imageUrl} />

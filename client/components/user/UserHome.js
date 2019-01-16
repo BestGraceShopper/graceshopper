@@ -20,12 +20,50 @@ class UserHome extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstName: '',
-      lastName: '',
-      address: '',
-      email: '',
-      phone: '',
-      formBool: true
+      firstName: this.props.user.firstName,
+      lastName: this.props.user.lastName,
+      address: this.props.user.address,
+      email: this.props.user.email,
+      phone: this.props.user.phone,
+      formBool: true,
+      orders: [
+        {
+          orderId: 1,
+          orderDate: 'January 5th, 2019',
+          orderPrice: '$74.99',
+          orderStatus: 'Completed'
+        },
+        {
+          orderId: 2,
+          orderDate: 'January 6th, 2019',
+          orderPrice: '$99.99',
+          orderStatus: 'Completed'
+        },
+        {
+          orderId: 3,
+          orderDate: 'January 10th, 2019',
+          orderPrice: '$250.00',
+          orderStatus: 'Shipped'
+        },
+        {
+          orderId: 4,
+          orderDate: 'January 15th, 2019',
+          orderPrice: '$47.99',
+          orderStatus: 'Future'
+        },
+        {
+          orderId: 5,
+          orderDate: 'January 3rd, 2019',
+          orderPrice: '$19.99',
+          orderStatus: 'Shipped'
+        },
+        {
+          orderId: 6,
+          orderDate: 'January 11th, 2019',
+          orderPrice: '$25.89',
+          orderStatus: 'Pending'
+        }
+      ]
     }
     this._onChange = this._onChange.bind(this)
     this._onSubmit = this._onSubmit.bind(this)
@@ -34,6 +72,8 @@ class UserHome extends Component {
   }
 
   _onChange(event) {
+    console.log(event.target.name)
+    console.log(event.target.value)
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -59,15 +99,19 @@ class UserHome extends Component {
     } else if (this.state.formBool === false) {
       this.setState({ formBool: true })
     }
+
     const updatedUserInfo = this.state
+    this.setState({ firstName: updatedUserInfo })
     const id = 1
     this.props.fetchUpdatedUser(updatedUserInfo, id)
   }
 
   render() {
+    const { user } = this.props
+    console.log(this.props)
     return (
       <div>
-        <Header as="h2">Welcome, {this.state.firstName}</Header>
+        <Header as="h2">Welcome</Header>
         <Divider fitted />
         <React.Fragment>
           <Divider horizontal>
@@ -80,7 +124,7 @@ class UserHome extends Component {
         <Container floated="center">
           <UserInfo
             formBool={this.state.formBool}
-            user={this.state}
+            user={user}
             _onChange={this._onChange}
             _onSubmit={this._onSubmit}
             userInfoEditHandler={this.userInfoEditHandler}
@@ -109,7 +153,7 @@ class UserHome extends Component {
                 <Table.HeaderCell>Order Details</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
-            {/* <Table.Body>
+            <Table.Body>
               {this.state.orders.map(order => {
                 return (
                   <Table.Row key={order.orderId}>
@@ -125,7 +169,7 @@ class UserHome extends Component {
                   </Table.Row>
                 )
               })}
-            </Table.Body> */}
+            </Table.Body>
           </Table>
         </Container>
         <Divider section hidden />

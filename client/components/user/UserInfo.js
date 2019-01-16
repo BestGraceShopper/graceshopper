@@ -74,7 +74,7 @@ class UserInfo extends Component {
                   <React.Fragment>
                     <Form.Input
                       name="firstName"
-                      placeholder={user.firstName}
+                      defaultValue={user.firstName}
                       onChange={this.props._onChange}
                     />
                   </React.Fragment>
@@ -88,7 +88,7 @@ class UserInfo extends Component {
                   <React.Fragment>
                     <Form.Input
                       name="lastName"
-                      placeholder={user.lastName}
+                      defaultValue={user.lastName}
                       onChange={this.props._onChange}
                     />
                   </React.Fragment>
@@ -102,7 +102,7 @@ class UserInfo extends Component {
                   <React.Fragment>
                     <Form.Input
                       name="email"
-                      placeholder={user.email}
+                      defaultValue={user.email}
                       onChange={this.props._onChange}
                     />
                   </React.Fragment>
@@ -115,8 +115,8 @@ class UserInfo extends Component {
                 <Grid.Column textAlign="left">
                   <React.Fragment>
                     <Form.Input
-                      name="email"
-                      placeholder={user.address}
+                      name="address"
+                      defaultValue={user.address}
                       onChange={this.props._onChange}
                     />
                   </React.Fragment>
@@ -130,7 +130,7 @@ class UserInfo extends Component {
                   <React.Fragment>
                     <Form.Input
                       name="phone"
-                      placeholder={user.phone}
+                      defaultValue={user.phone}
                       onChange={this.props._onChange}
                     />
                   </React.Fragment>

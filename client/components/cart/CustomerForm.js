@@ -19,11 +19,11 @@ class FormSuccess extends Component {
   }
 
   handlePurchaseClick() {
-    this.successCallback()
     this.props.isLoggedIn
       ? this.props.makePurchaseOrder(this.props.user.id, this.props.cartData)
       : this.props.makePurchaseOrder('guest', this.props.cart)
     // then action to actually make the purchase using Stripe
+    this.successCallback()
   }
 
   render() {
