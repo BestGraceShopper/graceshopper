@@ -3,11 +3,15 @@
 const db = require('../server/db')
 const User = require('../server/db/models/user')
 const Product = require('../server/db/models/product')
-
+const UserOrder = require('../server/db/models/userOrder')
 async function seed() {
   await db.sync({ force: true })
   console.log('db synced!')
 
+  const orders = await UserOrder.create({
+    ordered: false,
+    totalPrice: 1
+  })
   const users = await Promise.all([
     User.create({
       email: 'cody@email.com',
