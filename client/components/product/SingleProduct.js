@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
 import { getProduct } from '../../store/reducers/product'
@@ -24,7 +25,14 @@ class SingleProduct extends Component {
     const { product } = this.props
     return (
       <Card>
-        <Image centered height={300} width={300} src={product.imageUrl} />
+        <Image
+          as={Link}
+          to={`/products/${product.id}`}
+          centered
+          height={300}
+          width={300}
+          src={product.imageUrl}
+        />
         <Card.Content>
           <Card.Header>{product.name}</Card.Header>
           <Card.Meta>
