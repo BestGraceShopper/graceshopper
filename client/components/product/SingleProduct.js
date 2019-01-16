@@ -11,7 +11,14 @@ class SingleProduct extends Component {
     this.props.fetchSingleProduct(this.props.match.params.id)
   }
   handleAddToCart(product) {
-    this.props.addToCart(product)
+    const addProductInfo = {
+      product,
+      quantity: 0,
+      cartId: 1
+    }
+    console.log(addProductInfo)
+
+    this.props.addToCart(addProductInfo)
   }
 
   render() {
@@ -55,7 +62,10 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   const { singleProduct } = state.product
-  return { product: singleProduct }
+  return {
+    product: singleProduct,
+    cartData: state.cart.cartData
+  }
 }
 
 const mapDispatchToProps = dispatch => {

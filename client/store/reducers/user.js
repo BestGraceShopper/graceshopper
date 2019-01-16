@@ -2,15 +2,23 @@ import axios from 'axios'
 import history from '../../history'
 import { runInNewContext } from 'vm'
 
-// const GET_USER = 'GET_USER'
 export const AUTH_REQUEST = 'AUTH_REQUEST'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const AUTH_FAILURE = 'AUTH_FAILURE'
 
 const REMOVE_USER = 'REMOVE_USER'
+const UPDATE_USER = 'UPDATE_USER'
 
-// const getUser = user => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
+
+const updateUser = user => ({ type: UPDATE_USER, user })
+
+export const getUpdatedUser = (updatedUserInfo, id) => async dispatch => {
+  //post send object, delete use :id
+  console.log(updatedUserInfo, id)
+  const { data } = await axios.put(`/api/users/${id}`, updatedUserInfo)
+  dispatch(updateUser(data))
+}
 
 const authenticating = () => ({
   type: AUTH_REQUEST,
@@ -43,17 +51,6 @@ export const me = () => {
   }
 }
 
-// export const me = () => async dispatch => {
-//   try {
-//     const { data } = await axios.get('/auth/me')
-//     console.log(data, 'userdatea')
-//     if (data.email) {
-//       dispatch(getUser(data))
-//     }
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
 export const selectUserName = state => {
   const user = state.auth.user
   const title = user.gender === 'Male' ? 'Mr.' : 'Ms.'

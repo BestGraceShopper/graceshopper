@@ -10,16 +10,17 @@ import {
 import { connect } from 'react-redux'
 import UserInfo from './UserInfo'
 
+import { getUpdatedUser } from '../../store/reducers/user'
+
 class UserHome extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstName: 'John',
-      lastName: 'Adams',
-      address: '123 america lane',
-      email: 'JohnthePRES@america.colony',
-      phone: '212-100-6793',
-
+      firstName: this.props.user.firstName,
+      lastName: this.props.user.lastName,
+      address: this.props.user.address,
+      email: this.props.user.email,
+      phone: this.props.user.phone,
       formBool: true,
       orders: [
         {
@@ -67,12 +68,17 @@ class UserHome extends Component {
   }
 
   _onChange(event) {
+    console.log(event.target.name)
+    console.log(event.target.value)
     this.setState({
       [event.target.name]: event.target.value
     })
   }
   _onSubmit = event => {
     event.preventDefault()
+    const updatedUserInfo = this.state
+    const id = 1
+    this.props.fetchUpdatedUser(updatedUserInfo, id)
   }
 
   userInfoEditHandler() {
@@ -89,13 +95,19 @@ class UserHome extends Component {
     } else if (this.state.formBool === false) {
       this.setState({ formBool: true })
     }
+
+    const updatedUserInfo = this.state
+    this.setState({ firstName: updatedUserInfo })
+    const id = 1
+    this.props.fetchUpdatedUser(updatedUserInfo, id)
   }
 
   render() {
-    const user = this.props.user
+    const { user } = this.props
+    console.log(this.props)
     return (
       <div>
-        <Header as="h2">Welcome, {user.firstName}</Header>
+        <Header as="h2">Welcome</Header>
         <Divider fitted />
         <React.Fragment>
           <Divider horizontal>
@@ -162,10 +174,20 @@ class UserHome extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapState = state => {
   return {
-    user: state.user.user
+    cart: state.cart.cart,
+    user: state.user.user,
+    cartData: state.cart.cartData
   }
 }
 
-export default connect(mapStateToProps)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    fetchUpdatedUser: (userInfo, userId) => {
+      dispatch(getUpdatedUser(userInfo, userId))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
