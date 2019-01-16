@@ -1,19 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Item, Dropdown, Menu, Button } from 'semantic-ui-react'
 
-export default class CartItem extends React.Component {
+import { addToCart, createNewCart } from '../../store/reducers/cart'
+
+class CartItem extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      subtotal: this.props.product.price
+      subtotal: 0
     }
-    this.getQuantity = this.getQuantity.bind(this)
   }
 
-  async getQuantity(evt, { value }) {
+  componentDidMount() {
+    let subtotal = this.props.quantity * this.props.product.price
+    this.setState({ subtotal })
+  }
+  // componentDidUpdate() {
+  //   let subtotal = this.props.quantity * this.props.product.price
+  //   this.setState({ subtotal })
+  // }
+  setQuantity = (evt, { value }) => {
     evt.preventDefault()
-    const subtotal = this.props.product.price * value
-    await this.setState({ subtotal: subtotal })
+    console.log(this.props)
+    const addProductInfo = {
+      product: this.props.product,
+      quantity: value,
+      // HARDCODED ORDERID RIGHT HERE, NEED TO ACCESS
+      cartId: 1
+    }
+    this.props.addToCart(addProductInfo)
   }
 
   render() {
@@ -23,15 +39,15 @@ export default class CartItem extends React.Component {
       if (quant >= 10) {
         i = quant - 5
       } else {
-        i = 0
+        i = 1
       }
-      for (i; i <= quant + 5; i++) {
+      for (i; i <= 10; i++) {
         arr.push({ key: i, text: i, value: i })
       }
       return arr
     }
 
-    const { product, removeFromCart } = this.props
+    const { product, quantity, removeFromCart } = this.props
 
     return (
       <Item>
@@ -39,7 +55,7 @@ export default class CartItem extends React.Component {
         <Item.Content>
           <Item.Header>{product.name}</Item.Header>
           <Item.Meta>${product.price}</Item.Meta>
-          <Item.Meta> Quantity: {product.quantity}</Item.Meta>
+          <Item.Meta> Quantity: {quantity}</Item.Meta>
           <Item.Description>
             <span>{product.description}</span>
           </Item.Description>
@@ -50,17 +66,35 @@ export default class CartItem extends React.Component {
             <Menu compact floated="right">
               <Dropdown
                 labeled={true}
-                defaultValue={product.quantity}
-                options={options(product.quantity)}
-                onChange={this.getQuantity}
+                defaultValue={quantity}
+                options={options(quantity)}
+                onChange={this.setQuantity}
                 simple
                 item
               />
             </Menu>
           </Item.Extra>
-          <Item.Extra>total for this item: ${this.state.subtotal}</Item.Extra>
         </Item.Content>
       </Item>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    products: state.product.products,
+    cart: state.cart.cart,
+    cartData: state.cart.cartData,
+    user: state.user.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllProducts: () => dispatch(getAllProducts()),
+    createNewCart: () => dispatch(createNewCart()),
+    addToCart: product => dispatch(addToCart(product))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem)

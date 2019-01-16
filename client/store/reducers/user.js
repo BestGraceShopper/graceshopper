@@ -2,14 +2,12 @@ import axios from 'axios'
 import history from '../../history'
 import { runInNewContext } from 'vm'
 
-// const GET_USER = 'GET_USER'
 export const AUTH_REQUEST = 'AUTH_REQUEST'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const AUTH_FAILURE = 'AUTH_FAILURE'
 
 const REMOVE_USER = 'REMOVE_USER'
 
-// const getUser = user => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 
 const authenticating = () => ({
@@ -43,17 +41,6 @@ export const me = () => {
   }
 }
 
-// export const me = () => async dispatch => {
-//   try {
-//     const { data } = await axios.get('/auth/me')
-//     console.log(data, 'userdatea')
-//     if (data.email) {
-//       dispatch(getUser(data))
-//     }
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
 export const selectUserName = state => {
   const user = state.auth.user
   const title = user.gender === 'Male' ? 'Mr.' : 'Ms.'

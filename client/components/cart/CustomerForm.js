@@ -21,7 +21,7 @@ class FormSuccess extends Component {
   handlePurchaseClick() {
     this.successCallback()
     this.props.isLoggedIn
-      ? this.props.makePurchaseOrder(this.props.user.id, this.props.cart)
+      ? this.props.makePurchaseOrder(this.props.user.id, this.props.cartData)
       : this.props.makePurchaseOrder('guest', this.props.cart)
     // then action to actually make the purchase using Stripe
   }
@@ -66,13 +66,14 @@ const mapStateToProps = state => {
     user: state.user.user,
     products: state.product.products,
     cart: state.cart.cart,
-    orderSummary: state.product.orderSummary
+    orderSummary: state.product.orderSummary,
+    cartData: state.cart.cartData
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    makePurchaseOrder: (id, cart) => dispatch(purchaseOrder(id, cart))
+    makePurchaseOrder: (id, cartData) => dispatch(purchaseOrder(id, cartData))
   }
 }
 

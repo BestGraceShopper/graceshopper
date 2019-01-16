@@ -1,26 +1,14 @@
 const router = require('express').Router()
 
 const User = require('../db/models/user')
+const Product = require('../db/models/product')
 const UserOrder = require('../db/models/userOrder')
 const UserOrdersProduct = require('../db/models/userOrdersProduct')
 
-// router.get('/', async (req, res, next) => {
-//   try {
-//     const users = await User.findAll({
-//       // explicitly select only the id and email fields - even though
-//       // users' passwords are encrypted, it won't help if we just
-//       // send everything to anyone who asks!
-//       attributes: ['id', 'email']
-//     })
-//     res.json(users)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
 //VVVVVV USER ROUTES VVVVVV
 // NEEDS SECURITY
 
-// get user info
+// get user infoX
 router.get('/:id', async (req, res, next) => {
   try {
     if (req.user.id === Number(req.params.id)) {
@@ -38,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
-// update info
+// update infoX
 router.put('/:id', async (req, res, next) => {
   const { id } = req.params
   const updatedUserInfo = {
@@ -74,7 +62,7 @@ router.put('/:id', async (req, res, next) => {
 })
 
 //VVVVVVVV USER CART ROUTES VVVVVVVVV
-// return the current cart
+// return the current cartXX
 router.get('/:id/cart', async (req, res, next) => {
   let { id } = req.params
   try {
@@ -94,7 +82,30 @@ router.get('/:id/cart', async (req, res, next) => {
   }
 })
 
-// create new empty cart
+// return current UserOrderProducts plus ProductInfoX
+router.get('/:id/cart/:orderId', async (req, res, next) => {
+  let { orderId } = req.params
+  try {
+    if (req.user.id === Number(req.params.id)) {
+      const userOrder = await UserOrdersProduct.findAll({
+        where: {
+          orderId: orderId
+        },
+        include: {
+          model: Product,
+          as: 'product'
+        }
+      })
+      res.json(userOrder)
+    } else {
+      res.sendStatus(403)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+// create new empty cartX
 router.post('/:id/cart', async (req, res, next) => {
   const { id } = req.params
   // if no user id, then session ID will need to be used
@@ -117,9 +128,10 @@ router.post('/:id/cart', async (req, res, next) => {
   }
 })
 
-// Purchase Cart
+// Purchase CartX
 router.put('/:id/cart', async (req, res, next) => {
-  const cart = req.body
+  const cartData = req.body
+  console.log(cartData, 'PURCHASE CART')
   try {
     if (req.user.id === Number(req.params.id)) {
       const purchasedUserOrder = await UserOrder.update(
@@ -128,7 +140,7 @@ router.put('/:id/cart', async (req, res, next) => {
         },
         {
           where: {
-            id: cart.orderId
+            id: cartData.id
           }
         }
       )
@@ -148,9 +160,10 @@ router.put('/:id/cart', async (req, res, next) => {
   }
 })
 
-// add to product to the cart post route
+// add to product to the cart post route XY
 router.post('/:id/cart/product', async (req, res, next) => {
   const cart = req.body
+
   let quant
   if (cart.quantity === 0) {
     quant = 1
@@ -166,6 +179,7 @@ router.post('/:id/cart/product', async (req, res, next) => {
           quantity: quant
         }
       })
+
       if (!userOrdersProduct) {
         const err = Error('Cart not found')
         err.status = 404
@@ -194,6 +208,7 @@ router.post('/:id/cart/product', async (req, res, next) => {
           err.status = 404
           throw err
         } else {
+          // sends number of things we update
           res.json(updatedUserOrdersProduct)
         }
       } else {
@@ -207,33 +222,37 @@ router.post('/:id/cart/product', async (req, res, next) => {
   }
 })
 
-// remove product from the order
-router.delete('/:id/cart/product', async (req, res, next) => {
-  const cart = req.body
-  try {
-    if (req.user.id === Number(req.params.id)) {
-      const deletedUserOrdersProduct = await UserOrdersProduct.destroy({
-        where: {
-          orderId: cart.orderId,
-          productId: cart.productId
+// remove product from the order X
+router.delete(
+  '/:id/cart/:cartId/product/:productId',
+  async (req, res, next) => {
+    const { id, cartId, productId } = req.params
+    try {
+      if (req.user.id === Number(id)) {
+        const deletedUserOrdersProduct = await UserOrdersProduct.destroy({
+          where: {
+            orderId: cartId,
+            productId: productId
+          }
+        })
+        if (deletedUserOrdersProduct < 1) {
+          const err = Error('Error: Cannot delete product')
+          err.status = 404
+          throw err
+        } else {
+          res.status(204).json(req.params.id)
         }
-      })
-      if (deletedUserOrdersProduct < 1) {
-        const err = Error('Error: Cannot delete product')
-        err.status = 404
-        throw err
       } else {
-        res.status(204).json(req.params.id)
+        res.sendStatus(403)
       }
-    } else {
-      res.sendStatus(403)
+    } catch (error) {
+      next(error)
     }
-  } catch (error) {
-    next(error)
   }
-})
+)
 
 // VVVVVVV USER ORDER ROUTES VVVVVVVV
+// returns all purchased orders X
 router.get('/:id/orders', async (req, res, next) => {
   const { id } = req.params
   try {
@@ -250,36 +269,6 @@ router.get('/:id/orders', async (req, res, next) => {
     }
   } catch (error) {
     next(error)
-  }
-})
-
-// purchase route
-router.put('/:id/cart', async (req, res, next) => {
-  try {
-    let { id } = req.params
-    const cart = req.body
-    if (id === 'guest') id = null
-
-    const order = await UserOrder.create({
-      ordered: true,
-      totalPrice: 1,
-      userId: id
-    })
-
-    let orderResults = await Promise.all(
-      cart.map(async product => {
-        let orderItem = await UserOrdersProduct.create({
-          quantity: 1,
-          orderId: order.id,
-          productId: product.id
-        })
-        return orderItem
-      })
-    )
-
-    res.status(200).json(orderResults)
-  } catch (err) {
-    next(err)
   }
 })
 
