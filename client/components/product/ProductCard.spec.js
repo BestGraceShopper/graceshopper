@@ -27,14 +27,4 @@ describe('<ProductCard />', () => {
     const wrapper = shallow(<ProductCard product={dummyProduct} />)
     expect(wrapper.find('Image')).to.have.lengthOf(1)
   })
-
-  it('displays the product name', () => {
-    const wrapper = shallow(<ProductCard product={dummyProduct} />)
-    expect(wrapper.find('Card.Header')).to.have.lengthOf(1)
-  })
-
-  // it('displays the product price', () => {
-  //   const wrapper = shallow(<ProductCard />)
-  //   expect(wrapper.find('props.product.price')).to.have.lengthOf(1)
-  // })
 })
